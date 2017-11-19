@@ -46,9 +46,8 @@ outputFile=$SRCROOT/Example/Generated.swift
 3. Reduce the number of changes in the storyboards
 4. Test on a larger project to see what will happen
 5. Test integrated with Xcode's build phase script
-6. Generate the binary and add a release in the repo
-7. Distribute: Homebrew and others
-8. Add tests
+6. Distribute: Homebrew and others
+7. Add tests
 
 
 # Contributing
