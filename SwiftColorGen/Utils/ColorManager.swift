@@ -27,7 +27,7 @@ struct ColorManager {
                 color.alpha = Double(alpha) ?? 0.0
                 colors.insert(color)
                 
-                setColor(xml: xml, hex: color.hex)
+                setColor(xml: xml, name: color.name)
             }
             for child in xml.children {
                 read(xml: child)
@@ -37,13 +37,13 @@ struct ColorManager {
         return colors
     }
     
-    private static func setColor(xml: AEXMLElement, hex: String) {
+    private static func setColor(xml: AEXMLElement, name: String) {
         xml.attributes["red"] = nil
         xml.attributes["green"] = nil
         xml.attributes["blue"] = nil
         xml.attributes["alpha"] = nil
         xml.attributes["colorSpace"] = nil
         xml.attributes["customColorSpace"] = nil
-        xml.attributes["name"] = hex
+        xml.attributes["name"] = name
     }
 }

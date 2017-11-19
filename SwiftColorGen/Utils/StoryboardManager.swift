@@ -42,10 +42,9 @@ struct StoryboardManager {
         }
         for color in colors {
             if resources.getChild(name: "namedColor",
-                                  attributes: ["name": color.hex]) == nil {
+                                  attributes: ["name": color.name]) == nil {
                 let child = resources.addChild(name: "namedColor",
-                                               value: nil,
-                                               attributes: ["name": color.hex])
+                                               attributes: ["name": color.name])
                 child.addChild(name: "color",
                                value: nil,
                                attributes: ["red": String(color.red),
@@ -65,7 +64,7 @@ struct StoryboardManager {
     
     static func writeColorAssets(path: String, colors: Set<ColorData>) {
         for color in colors {
-            let colorPath = "\(path)/\(color.hex).colorset"
+            let colorPath = "\(path)/\(color.name).colorset"
             let contentsPath = "\(colorPath)/Contents.json"
             try? FileManager.default.createDirectory(at: URL(fileURLWithPath: colorPath), withIntermediateDirectories: false, attributes: nil)
             let data = "{\"info\":{\"version\":1,\"author\":\"xcode\"},\"colors\":[{\"idiom\":\"universal\",\"color\":{\"color-space\":\"srgb\",\"components\":{\"red\":\"\(color.red)\",\"alpha\":\"\(color.alpha)\",\"blue\":\"\(color.blue)\",\"green\":\"\(color.green)\"}}}]}"
@@ -76,8 +75,8 @@ struct StoryboardManager {
     static func writeOutputfile(path: String, colors: Set<ColorData>) {
         var output = "extension UIColor {\n"
         for color in colors {
-            output += "\tclass func gen\(color.hex)() -> UIColor {\n"
-            output += "\t\treturn UIColor(named: \"\(color.hex)\") ?? UIColor.white\n"
+            output += "\tclass func gen\(color.name)() -> UIColor {\n"
+            output += "\t\treturn UIColor(named: \"\(color.name)\") ?? UIColor.white\n"
             output += "\t}\n\n"
         }
         output += "}\n"

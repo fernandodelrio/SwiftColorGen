@@ -24,7 +24,7 @@ class ColorData: Hashable {
             .replacingOccurrences(of: " ", with: "0")
         let hexBlue = String(format: "%2X", blueValue)
             .replacingOccurrences(of: " ", with: "0")
-        return "\(hexRed)\(hexGreen)\(hexBlue)(\(alphaValue))"
+        return "\(hexRed)\(hexGreen)\(hexBlue)-\(alphaValue)"
     }
     
     init() {
