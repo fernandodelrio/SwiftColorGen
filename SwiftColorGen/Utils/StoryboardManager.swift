@@ -75,7 +75,7 @@ struct StoryboardManager {
     static func writeOutputfile(path: String, colors: Set<ColorData>) {
         var output = "extension UIColor {\n"
         for color in colors {
-            output += "\tclass func gen\(color.name)() -> UIColor {\n"
+            output += "\tclass func gen\(color.safeName)() -> UIColor {\n"
             output += "\t\treturn UIColor(named: \"\(color.name)\") ?? UIColor.white\n"
             output += "\t}\n\n"
         }
