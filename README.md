@@ -10,10 +10,6 @@ The user should call the CLI passing:
  created)
 Obs: Always use absolute paths when passing the arguments. If you pass a relative path, it won't work
 
-Example:
-```shell
-$ swift ./main.swift baseFolder=/Users/MyUser/Documents/MyCoolProject/ assetsFolder=/Users/MyUser/Documents/MyCoolProject/Assets.xcassets outputFile=/Users/MyUser/Documents/MyCoolProject/Generated.swift
-```
 There's an example inside the project, so you can test the code generation.
 
 You can call the CLI using the terminal, but you can also call it using Xcode. To do that, just edit the scheme and add **Arguments Passed On Launch**:
@@ -26,7 +22,8 @@ outputFile=$SRCROOT/Example/Generated.swift
 1. Add support to other color spaces than the sRGB
 2. Distribute: Homebrew and others
 3. Add screenshots to README.md
-4. Add tests
+4. Improve the CLI: Pass parameters in a more clean way. Accept relative paths
+5. Add tests
 
 # Contributing
 This project still on a initial stage of development. Feel free to contribute by testing it and reporting bugs. If you want to help developing it, checkout the TODO list. If you made some enhancement, open a pull request.

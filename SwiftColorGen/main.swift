@@ -4,7 +4,7 @@
 //
 //  Created by Fernando del Rio (fernandomdr@gmail.com) on 18/11/17.
 //
-// SwiftColorGen is a tool that generate code for iOS projects,
+// SwiftColorGen is a tool that generate code for Swift projects,
 //   designed to improve the maintainability of UIColors.
 //
 // First it reads all storyboard files to find common sRGB colors.
@@ -18,9 +18,6 @@
 // 2. The .xcassets folder (where the colors will be created)
 // 3. The swift output file (where the UIColor's extension will be
 //   created)
-//
-// Example:
-// $ swift ./main.swift baseFolder=/Users/MyUser/Documents/MyCoolProject/ assetsFolder=/Users/MyUser/Documents/MyCoolProject/Assets.xcassets outputFile=/Users/MyUser/Documents/MyCoolProject/Generated.swift
 //
 // There's an example inside the project, so you can test the code
 //   generation.
