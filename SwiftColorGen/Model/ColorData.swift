@@ -8,40 +8,37 @@
 
 import Foundation
 
-class ColorData: NSObject {
+class ColorData: Hashable {
     var red: Double
     var green: Double
     var blue: Double
     var alpha: Double
-    var hex: String {
+    var name: String {
         let redValue = Int(255*Double(red))
         let greenValue = Int(255*Double(green))
         let blueValue = Int(255*Double(blue))
+        let alphaValue = Int(255*Double(alpha))
         let hexRed = String(format: "%2X", redValue)
             .replacingOccurrences(of: " ", with: "0")
         let hexGreen = String(format: "%2X", greenValue)
             .replacingOccurrences(of: " ", with: "0")
         let hexBlue = String(format: "%2X", blueValue)
             .replacingOccurrences(of: " ", with: "0")
-        return "\(hexRed)\(hexGreen)\(hexBlue)"
+        return "\(hexRed)\(hexGreen)\(hexBlue)(\(alphaValue))"
     }
     
-    override init() {
+    init() {
         red = 0.0
         green = 0.0
         blue = 0.0
         alpha = 0.0
     }
     
-    override var description: String {
-        return "(red:\(red),green:\(green),blue:\(blue),alpha:\(red))"
-    }
-    
     static func ==(lhs: ColorData, rhs: ColorData) -> Bool {
-        return lhs.hex == rhs.hex
+        return lhs.name == rhs.name
     }
     
-    override var hashValue: Int {
-        return hex.hashValue
+    var hashValue: Int {
+        return name.hashValue
     }
 }
