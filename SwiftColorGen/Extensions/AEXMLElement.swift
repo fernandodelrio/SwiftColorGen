@@ -2,13 +2,14 @@
 //  AEXMLElement.swift
 //  SwiftColorGen
 //
-//  Created by Fernando Henrique Bonfim Moreno Del Rio on 19/11/17.
-//  Copyright © 2017 Fernando del Rio. All rights reserved.
+//  Created by Fernando del Rio (fernandomdr@gmail.com) on 19/11/17.
 //
 
 import Foundation
 
 extension AEXMLElement {
+    // Get a AEXMLElement, filtering by the name
+    // and optionally by attributes
     func getChild(name: String,
                   attributes: [String:String] = [:]) -> AEXMLElement? {
         for child in children {

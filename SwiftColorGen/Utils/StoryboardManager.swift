@@ -2,13 +2,13 @@
 //  StoryboardManager.swift
 //  SwiftColorGen
 //
-//  Created by Fernando Henrique Bonfim Moreno Del Rio on 19/11/17.
-//  Copyright © 2017 Fernando del Rio. All rights reserved.
+//  Created by Fernando Del Rio (fernandomdr@gmail.com) on 19/11/17.
 //
 
 import Foundation
 
 struct StoryboardManager {
+    // Iterate over the base folder to get the storyboard files
     static func getStoryboards(baseFolder: String) -> [String] {
         var storyboards: [String] = []
         let enumerator = FileManager.default.enumerator(atPath: baseFolder)
@@ -20,7 +20,9 @@ struct StoryboardManager {
         return storyboards
     }
     
-    static func readStoryboard(path: String) -> (xml: AEXMLDocument, colors: Set<ColorData>) {
+    // Update the storyboard setting the named colors on in and
+    // returns the updated XML and the colors found
+    static func updateStoryboard(path: String) -> (xml: AEXMLDocument, colors: Set<ColorData>) {
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
             return (xml: AEXMLDocument(), colors: Set<ColorData>())
         }
@@ -28,11 +30,13 @@ struct StoryboardManager {
             return (xml: AEXMLDocument(), colors: Set<ColorData>())
         }
         
+        // Here the colors are updated after they're retrieved
         let colors = ColorManager.getColors(xml: xml.root)
         
         return (xml: xml, colors: colors)
     }
     
+    // Add the "resources" key to avoid a storyboard warning
     static func addResources(xml: AEXMLDocument, colors: Set<ColorData>) -> AEXMLDocument {
         if xml.root.getChild(name: "resources") == nil {
             xml.root.addChild(name: "resources")
@@ -40,7 +44,8 @@ struct StoryboardManager {
         guard let resources = xml.root.getChild(name: "resources") else {
             return AEXMLDocument()
         }
-        for color in colors {
+        colors.forEach { color in
+            // Adding only if it's not already there
             if resources.getChild(name: "namedColor",
                                   attributes: ["name": color.name]) == nil {
                 let child = resources.addChild(name: "namedColor",
@@ -58,12 +63,14 @@ struct StoryboardManager {
         return xml
     }
     
+    // Write the updated storyboard to file
     static func writeStoryboard(xml: AEXMLDocument, path: String) {
         try? xml.xml.write(to: URL(fileURLWithPath: path), atomically: false, encoding: .utf8)
     }
     
+    // Write all colors to the .xcassets folder
     static func writeColorAssets(path: String, colors: Set<ColorData>) {
-        for color in colors {
+        colors.forEach { color in
             let colorPath = "\(path)/\(color.name).colorset"
             let contentsPath = "\(colorPath)/Contents.json"
             try? FileManager.default.createDirectory(at: URL(fileURLWithPath: colorPath), withIntermediateDirectories: false, attributes: nil)
@@ -72,9 +79,11 @@ struct StoryboardManager {
         }
     }
     
+    // Write the UIColor extension output file
     static func writeOutputfile(path: String, colors: Set<ColorData>) {
-        var output = "extension UIColor {\n"
-        for color in colors {
+        var output = "// Don't change. Auto generated file. SwiftColorGen\n\n"
+        output += "extension UIColor {\n"
+        colors.forEach { color in
             output += "\tclass func gen\(color.safeName)() -> UIColor {\n"
             output += "\t\treturn UIColor(named: \"\(color.name)\") ?? UIColor.white\n"
             output += "\t}\n\n"

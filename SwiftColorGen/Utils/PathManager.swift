@@ -2,13 +2,14 @@
 //  PathManager.swift
 //  SwiftColorGen
 //
-//  Created by Fernando Henrique Bonfim Moreno Del Rio on 19/11/17.
-//  Copyright © 2017 Fernando del Rio. All rights reserved.
+//  Created by Fernando Del Rio (fernandomdr@gmail.com) on 19/11/17.
 //
 
 import Foundation
 
 struct PathManager {
+    // Filter storyboard files, avoid messing with code
+    //   inside Cocoa Pods, Carthage and Swift PM
     static func isValidStoryboard(path: String) -> Bool {
         guard path.hasSuffix(".storyboard") else {
             return false

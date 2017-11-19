@@ -2,12 +2,15 @@
 //  ColorData.swift
 //  SwiftColorGen
 //
-//  Created by Fernando Henrique Bonfim Moreno Del Rio on 19/11/17.
-//  Copyright © 2017 Fernando del Rio. All rights reserved.
+//  Created by Fernando del Rio (fernandomdr@gmail.com) on 19/11/17.
 //
 
 import Foundation
 
+// The color data structure, unically identified by
+// the RGBA values. The name and safe name are used
+// to name the colors inside the .xcassets folder and
+// the generated swift file functions
 class ColorData: Hashable {
     var red: Double
     var green: Double

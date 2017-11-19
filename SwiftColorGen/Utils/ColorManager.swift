@@ -2,13 +2,13 @@
 //  ColorManager.swift
 //  SwiftColorGen
 //
-//  Created by Fernando Henrique Bonfim Moreno Del Rio on 19/11/17.
-//  Copyright © 2017 Fernando del Rio. All rights reserved.
+//  Created by Fernando Del Rio (fernandomdr@gmail.com) on 19/11/17.
 //
 
 import Foundation
 
 struct ColorManager {
+    // Get a set of sRGB colors from the storyboard
     static func getColors(xml: AEXMLElement) -> Set<ColorData> {
         var colors: Set<ColorData> = Set<ColorData>()
         func read(xml: AEXMLElement) {
@@ -37,6 +37,8 @@ struct ColorManager {
         return colors
     }
     
+    // Update the storyboard color from a raw value
+    // to a named color
     private static func setColor(xml: AEXMLElement, name: String) {
         xml.attributes["red"] = nil
         xml.attributes["green"] = nil

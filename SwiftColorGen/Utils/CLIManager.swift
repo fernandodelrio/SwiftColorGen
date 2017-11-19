@@ -2,13 +2,13 @@
 //  CLIManager.swift
 //  SwiftColorGen
 //
-//  Created by Fernando Henrique Bonfim Moreno Del Rio on 19/11/17.
-//  Copyright © 2017 Fernando del Rio. All rights reserved.
+//  Created by Fernando Del Rio (fernandomdr@gmail.com) on 19/11/17.
 //
 
 import Foundation
 
 struct CLIManager {
+    // Returns the arguments in a valid format
     static func getArgs(arguments: [String]) -> (baseFolder: String, assetsFolder: String, outputFile: String)? {
         guard arguments.count == 4 else {
             return nil
