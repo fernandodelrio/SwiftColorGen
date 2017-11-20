@@ -1,7 +1,7 @@
 # SwiftColorGen
 A tool that generate code for Swift projects, designed to improve the maintainability of UIColors
 
-First it reads all storyboard files to find common **sRGB colors**. Then it creates those colors in a **.xcassets** file and refer them in the storyboard. Finally it creates a **UIColor extension** allowing to access the same colors programatically.
+First it reads all storyboard files to find common **sRGB colors**. Then it creates those colors in a **.xcassets** folder and refer them in the storyboard. Finally it creates a **UIColor extension** allowing to access the same colors programatically.
 
 SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML.
 
