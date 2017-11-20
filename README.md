@@ -44,10 +44,11 @@ outputFile=$SRCROOT/Example/Generated.swift
 1. Add support to other color spaces than the sRGB
 2. Improve the CLI: Pass parameters in a more clean way. Accept relative paths
 3. Reduce the number of changes in the storyboards
-4. Test on a larger project to see what will happen
-5. Test integrated with Xcode's build phase script
-6. Distribute: Homebrew and others
-7. Add tests
+4. Find the closest match name to the RGB color to produce something like **blueColor255** instead of **gen0000FF_255**
+5. Test on a larger project to see what will happen
+6. Test integrated with Xcode's build phase script
+7. Distribute: Homebrew and others
+8. Add tests
 
 
 # Contributing
