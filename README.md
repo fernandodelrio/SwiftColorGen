@@ -1,5 +1,7 @@
 # SwiftColorGen
-A tool that generate code for Swift projects, designed to improve the maintainability of UIColors.
+A tool that generate code for Swift projects, designed to improve the maintainability of UIColors. 
+
+Please notice, this tool still under development. It's on a validation phase, where I'll test it integrated with existing iOS projects to see how useful it is. Feedbacks are appreciated.
 
 First it reads all storyboard files to find common **sRGB colors**. Then it creates those colors in a **.xcassets** folder and refer them in the storyboard. Finally it creates a **UIColor extension** allowing to access the same colors programatically.
 
@@ -56,5 +58,3 @@ This project still on a initial stage of development. Feel free to contribute by
 
 # License
 SwiftColorGen is available under the MIT license. See the LICENSE file for more info.
-
-> Please notice, this tool still under development. It's on a validation phase, where I'll test it integrated with existing iOS projects to see if how useful it is. Feedbacks and better ways to handle things are appreciated.
