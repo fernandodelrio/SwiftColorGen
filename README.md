@@ -12,6 +12,9 @@ The rules for naming the colors dinamically:
 
 SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML.
 
+# Screenshots
+That's the result of the code generation:
+
 ### The generated named colors in the Storyboard
 ![Storyboard](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Storyboard0.2.0.png)
 
@@ -31,16 +34,33 @@ extension UIColor {
 }
 ```
 
-The user should call the CLI passing:
+# Using the CLI
+First, call the **build.sh** script (it will produce the **swiftcg** binary in the same folder):
+```shell
+chmod +x build.sh
+./build.sh
+```
+
+Then call the CLI passing:
 1. The project's base folder (that contains the storyboard)
 2. The .xcassets folder (where the colors will be created)
-3. The swift output file (where the UIColor's extension will be
- created)
+3. The swift output file (where the UIColor's extension will be created)
 Obs: Always use absolute paths when passing the arguments. If you pass a relative path, it won't work
+ 
+Example:
+```shell
+./swiftcg baseFolder=$PWD/Example assetsFolder=$PWD/Example/Assets.xcassets outputFile=$PWD/Example/Generated.swift
+```
 
-There's an example inside the project, so you can test the code generation.
+To test with the Example provided, call the **test.sh** script (it will update the files inside the Example folder):
+```shell
+chmod +x test.sh
+./test.sh
+```
 
 You can call the CLI using the terminal, but you can also call it using Xcode. To do that, just edit the scheme and add **Arguments Passed On Launch**:
+
+Example:
 ```
 baseFolder=$SRCROOT/Example
 assetsFolder=$SRCROOT/Example/Assets.xcassets
