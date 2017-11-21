@@ -70,22 +70,24 @@ struct StoryboardManager {
     
     // Write all colors to the .xcassets folder
     static func writeColorAssets(path: String, colors: Set<ColorData>) {
-        colors.forEach { color in
-            let colorPath = "\(path)/\(color.name).colorset"
+        let generatorData = ColorManager.getColorsForGenerator(colors: colors)
+        generatorData.forEach { data in
+            let colorPath = "\(path)/\(data.assetName).colorset"
             let contentsPath = "\(colorPath)/Contents.json"
             try? FileManager.default.createDirectory(at: URL(fileURLWithPath: colorPath), withIntermediateDirectories: false, attributes: nil)
-            let data = "{\"info\":{\"version\":1,\"author\":\"xcode\"},\"colors\":[{\"idiom\":\"universal\",\"color\":{\"color-space\":\"srgb\",\"components\":{\"red\":\"\(color.red)\",\"alpha\":\"\(color.alpha)\",\"blue\":\"\(color.blue)\",\"green\":\"\(color.green)\"}}}]}"
+            let data = "{\"info\":{\"version\":1,\"author\":\"xcode\"},\"colors\":[{\"idiom\":\"universal\",\"color\":{\"color-space\":\"srgb\",\"components\":{\"red\":\"\(data.color.red)\",\"alpha\":\"\(data.color.alpha)\",\"blue\":\"\(data.color.blue)\",\"green\":\"\(data.color.green)\"}}}]}"
             try? data.write(to: URL(fileURLWithPath: contentsPath), atomically: false, encoding: .utf8)
         }
     }
     
     // Write the UIColor extension output file
     static func writeOutputfile(path: String, colors: Set<ColorData>) {
+        let generatorData = ColorManager.getColorsForGenerator(colors: colors)
         var output = "// Don't change. Auto generated file. SwiftColorGen\n\n"
         output += "extension UIColor {\n"
-        colors.forEach { color in
-            output += "\tclass func gen\(color.safeName)() -> UIColor {\n"
-            output += "\t\treturn UIColor(named: \"\(color.name)\") ?? UIColor.white\n"
+        generatorData.forEach { data in
+            output += "\tclass func \(data.outputName)() -> UIColor {\n"
+            output += "\t\treturn UIColor(named: \"\(data.assetName)\") ?? UIColor.white\n"
             output += "\t}\n\n"
         }
         output += "}\n"

@@ -28,13 +28,24 @@ class ColorData: Hashable {
             .replacingOccurrences(of: " ", with: "0")
         let hexBlue = String(format: "%2X", blueValue)
             .replacingOccurrences(of: " ", with: "0")
-        return "\(hexRed)\(hexGreen)\(hexBlue)(\(alphaValue))"
+        return "\(hexRed)\(hexGreen)\(hexBlue) (alpha \(alphaValue))"
     }
     
-    var safeName: String {
-        return name
-                .replacingOccurrences(of: "(", with: "_")
-                .replacingOccurrences(of: ")", with: "")
+    var assetName: String {
+        let alphaValue = Int(255*Double(alpha))
+        if alpha == 1.0 {
+            return name.replacingOccurrences(of: "(\(alphaValue))", with: "")
+        } else {
+            return name
+        }
+    }
+    var outputName: String {
+        let alphaValue = Int(255*Double(alpha))
+        if alpha == 1.0 {
+            return "gen"+name.replacingOccurrences(of: "(\(alphaValue))", with: "")
+        } else {
+            return "gen"+name.replacingOccurrences(of: "(\(alphaValue))", with: "_alpha_\(alphaValue)")
+        }
     }
 
     init() {
