@@ -13,13 +13,13 @@ The rules for naming the colors dinamically:
 SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML.
 
 ### The generated named colors in the Storyboard
-![Storyboard](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Storyboard.png)
+![Storyboard](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Storyboard0.2.0.png)
 
 ### The generated colors in the Assets catalog
-![Assets Catalog](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Assets.png)
+![Assets Catalog](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Assets0.2.0.png)
 
 ### The generated Swift file
-![Swift file](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Swift.png)
+![Swift file](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Swift0.2.0.png)
 
 You can also create your own extensions in a separated file to give a more semantic name to the colors:
 
