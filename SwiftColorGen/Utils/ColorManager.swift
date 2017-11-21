@@ -26,8 +26,10 @@ struct ColorManager {
                 color.alpha = Double(alpha) ?? 0.0
                 colors.insert(color)
             }
-            for child in xml.children {
-                read(xml: child)
+            if xml.name != "namedColor" {
+                for child in xml.children {
+                    read(xml: child)
+                }
             }
         }
         read(xml: xml)

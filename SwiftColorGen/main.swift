@@ -48,6 +48,9 @@ func main() {
         // Place all colors in a set to avoid duplicates
         allColors = allColors.union(colors)
     }
+    if allColors.isEmpty {
+        return
+    }
     storyboards.forEach { storyboard in
         // Updates the storyboard, settings the colors
         let xml = StoryboardManager.updateStoryboard(path: storyboard,
