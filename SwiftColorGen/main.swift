@@ -43,14 +43,18 @@ func main() {
     // Gets the list of storyboards
     let storyboards = StoryboardManager.getStoryboards(baseFolder: args.baseFolder)
     storyboards.forEach { storyboard in
-        // Gets the updated storyboard (replacing the raw
-        // colors with the named colors) and the list of colors
-        let result = StoryboardManager.updateStoryboard(path: storyboard)
+        // Gets the list of colors
+        let colors = StoryboardManager.readStoryboard(path: storyboard)
+        // Place all colors in a set to avoid duplicates
+        allColors = allColors.union(colors)
+    }
+    storyboards.forEach { storyboard in
+        // Updates the storyboard, settings the colors
+        let xml = StoryboardManager.updateStoryboard(path: storyboard,
+                                                     colors: allColors)
         // Adds the "resources" key to the storyboard, to
         // avoid a storyboard warning
-        let xml = StoryboardManager.addResources(xml: result.xml, colors: result.colors)
-        // Place all colors in a set to avoid duplicates
-        allColors = allColors.union(result.colors)
+        StoryboardManager.addResources(xml: xml, colors: allColors)
         // Write the modified XML to file
         StoryboardManager.writeStoryboard(xml: xml, path: storyboard)
     }

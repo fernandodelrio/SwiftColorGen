@@ -8,9 +8,9 @@
 import Foundation
 
 // The color data structure, unically identified by
-// the RGBA values. The name and safe name are used
-// to name the colors inside the .xcassets folder and
-// the generated swift file functions
+// the RGBA values. The assetName and the outputName
+// are used to name the colors inside the .xcassets
+// folder and the generated swift file functions
 class ColorData: Hashable {
     var red: Double
     var green: Double
@@ -42,9 +42,9 @@ class ColorData: Hashable {
     var outputName: String {
         let alphaValue = Int(255*Double(alpha))
         if alpha == 1.0 {
-            return "gen"+name.replacingOccurrences(of: "(\(alphaValue))", with: "")
+            return name.replacingOccurrences(of: "(\(alphaValue))", with: "")
         } else {
-            return "gen"+name.replacingOccurrences(of: "(\(alphaValue))", with: "_alpha_\(alphaValue)")
+            return name.replacingOccurrences(of: "(\(alphaValue))", with: "_alpha_\(alphaValue)")
         }
     }
 

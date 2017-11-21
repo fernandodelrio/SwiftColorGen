@@ -20,36 +20,47 @@ struct StoryboardManager {
         return storyboards
     }
     
-    // Update the storyboard setting the named colors on in and
-    // returns the updated XML and the colors found
-    static func updateStoryboard(path: String) -> (xml: AEXMLDocument, colors: Set<ColorData>) {
+    // Read the storyboard returning the colors found
+    static func readStoryboard(path: String) -> Set<ColorData> {
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
-            return (xml: AEXMLDocument(), colors: Set<ColorData>())
+            return Set<ColorData>()
         }
         guard let xml = try? AEXMLDocument(xml: data, options: AEXMLOptions()) else {
-            return (xml: AEXMLDocument(), colors: Set<ColorData>())
+            return Set<ColorData>()
         }
-        
-        // Here the colors are updated after they're retrieved
-        let colors = ColorManager.getColors(xml: xml.root)
-        
-        return (xml: xml, colors: colors)
+        return ColorManager.getColors(xml: xml.root)
+    }
+    
+    // Update the storyboard colors and return the updated XML
+    static func updateStoryboard(path: String, colors: Set<ColorData>) -> AEXMLDocument {
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
+            return AEXMLDocument()
+        }
+        guard let xml = try? AEXMLDocument(xml: data, options: AEXMLOptions()) else {
+            return AEXMLDocument()
+        }
+        ColorManager.updateColors(xml: xml.root, colors: colors)
+        return xml
     }
     
     // Add the "resources" key to avoid a storyboard warning
-    static func addResources(xml: AEXMLDocument, colors: Set<ColorData>) -> AEXMLDocument {
+    static func addResources(xml: AEXMLDocument, colors: Set<ColorData>) {
+        let generatorData = ColorManager.getColorsForGenerator(colors: colors)
         if xml.root.getChild(name: "resources") == nil {
             xml.root.addChild(name: "resources")
         }
         guard let resources = xml.root.getChild(name: "resources") else {
-            return AEXMLDocument()
+            return
         }
         colors.forEach { color in
             // Adding only if it's not already there
             if resources.getChild(name: "namedColor",
                                   attributes: ["name": color.name]) == nil {
+                guard let data = (generatorData.filter { $0.color == color }.first) else {
+                    return
+                }
                 let child = resources.addChild(name: "namedColor",
-                                               attributes: ["name": color.name])
+                                               attributes: ["name": data.assetName])
                 child.addChild(name: "color",
                                value: nil,
                                attributes: ["red": String(color.red),
@@ -60,7 +71,6 @@ struct StoryboardManager {
                                             "customColorSpace": "sRGB"])
             }
         }
-        return xml
     }
     
     // Write the updated storyboard to file
@@ -86,7 +96,7 @@ struct StoryboardManager {
         var output = "// Don't change. Auto generated file. SwiftColorGen\n\n"
         output += "extension UIColor {\n"
         generatorData.forEach { data in
-            output += "\tclass func \(data.outputName)() -> UIColor {\n"
+            output += "\tclass func gen\(data.outputName)() -> UIColor {\n"
             output += "\t\treturn UIColor(named: \"\(data.assetName)\") ?? UIColor.white\n"
             output += "\t}\n\n"
         }
