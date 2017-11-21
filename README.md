@@ -3,14 +3,19 @@ A tool that generate code for Swift projects, designed to improve the maintainab
 
 Please notice, this tool still under development. It's on a validation phase, where I'll test it integrated with existing iOS projects to see how useful it is. Feedbacks are appreciated.
 
-First it reads all storyboard files to find common **sRGB colors**. Then it creates those colors in a **.xcassets** folder and refer them in the storyboard. Finally it creates a **UIColor extension** allowing to access the same colors programatically.
+**SwiftColorGen** reads all storyboard files to find common **sRGB colors**. Then it creates those colors in a **.xcassets** folder and refer them in the storyboard. Finally it creates a **UIColor extension** allowing to access the same colors programatically.
+
+The rules for naming the colors dinamically:
+- The closest web color name (https://en.wikipedia.org/wiki/Web_colors) is considered to name the color
+- If the alpha value is less than 255, an "alpha suffix" will be appended to the color name, to avoid name collision
+- If two RGB's are close to the same web color, the hex of the RGB will be used to avoid name collision
 
 SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML.
 
-### The named colors in the Storyboard
+### The generated named colors in the Storyboard
 ![Storyboard](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Storyboard.png)
 
-### The colors in the Assets catalog
+### The generated colors in the Assets catalog
 ![Assets Catalog](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Assets.png)
 
 ### The generated Swift file
@@ -21,7 +26,7 @@ You can also create your own extensions in a separated file to give a more seman
 ```swift
 extension UIColor {
     class func defaultTextColor() -> UIColor {
-        return .gen000000_255()
+        return .genDeepPink()
     }
 }
 ```
@@ -46,11 +51,10 @@ outputFile=$SRCROOT/Example/Generated.swift
 1. Add support to other color spaces than the sRGB
 2. Improve the CLI: Pass parameters in a more clean way. Accept relative paths
 3. Reduce the number of changes in the storyboards
-4. Find the closest match name to the RGB color to produce something like **blueColor255** instead of **gen0000FF_255**
-5. Test on a larger project to see what will happen
-6. Test integrated with Xcode's build phase script
-7. Distribute: Homebrew and others
-8. Add tests
+4. Test on a larger project to see what will happen
+5. Test integrated with Xcode's build phase script
+6. Distribute: Homebrew and others
+7. Add tests
 
 
 # Contributing
