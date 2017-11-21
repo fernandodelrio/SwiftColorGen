@@ -19,6 +19,7 @@
 		D89E2F1A1FC1B76700CDC51C /* StoryboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E2F191FC1B76700CDC51C /* StoryboardManager.swift */; };
 		D89E2F1E1FC1B90900CDC51C /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E2F1D1FC1B90900CDC51C /* PathManager.swift */; };
 		D89E2F201FC1C2AB00CDC51C /* CLIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E2F1F1FC1C2AB00CDC51C /* CLIManager.swift */; };
+		D8C9BC451FC2FE1E007261A7 /* WebColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9BC441FC2FE1E007261A7 /* WebColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +53,7 @@
 		D89E2F261FC1D44800CDC51C /* First.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = First.storyboard; sourceTree = "<group>"; };
 		D89E2F271FC1D82F00CDC51C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D89E2F281FC1D85900CDC51C /* Generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generated.swift; sourceTree = "<group>"; };
+		D8C9BC441FC2FE1E007261A7 /* WebColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				D89E2EEC1FC1B26200CDC51C /* ColorData.swift */,
+				D8C9BC441FC2FE1E007261A7 /* WebColors.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C9BC451FC2FE1E007261A7 /* WebColors.swift in Sources */,
 				D89E2F1E1FC1B90900CDC51C /* PathManager.swift in Sources */,
 				D89E2EE61FC1B10800CDC51C /* main.swift in Sources */,
 				D89E2EED1FC1B26200CDC51C /* ColorData.swift in Sources */,
