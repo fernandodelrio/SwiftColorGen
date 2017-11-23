@@ -37,8 +37,8 @@ extension UIColor {
 # Using the CLI
 First, call the **build.sh** script (it will produce the **swiftcg** binary in the same folder):
 ```shell
-chmod +x build.sh
-./build.sh
+$ chmod +x build.sh
+$ ./build.sh
 ```
 
 Then call the CLI passing:
@@ -49,13 +49,13 @@ Obs: Always use absolute paths when passing the arguments. If you pass a relativ
  
 Example:
 ```shell
-./swiftcg baseFolder=$PWD/Example assetsFolder=$PWD/Example/Assets.xcassets outputFile=$PWD/Example/Generated.swift
+$ ./swiftcg baseFolder=$PWD/Example assetsFolder=$PWD/Example/Assets.xcassets outputFile=$PWD/Example/Generated.swift
 ```
 
 To test with the Example provided, call the **test.sh** script (it will update the files inside the Example folder):
 ```shell
-chmod +x test.sh
-./test.sh
+$ chmod +x test.sh
+$ ./test.sh
 ```
 
 You can call the CLI using the terminal, but you can also call it using Xcode. To do that, just edit the scheme and add **Arguments Passed On Launch**:
@@ -71,10 +71,11 @@ outputFile=$SRCROOT/Example/Generated.swift
 1. Add support to other color spaces than the sRGB
 2. Improve the CLI: Pass parameters in a more clean way. Accept relative paths
 3. Reduce the number of changes in the storyboards
-4. Test on a larger project to see what will happen
-5. Test integrated with Xcode's build phase script
-6. Distribute: Homebrew and others
-7. Add tests
+4. Update the color name and storyboard/.xcassets references, when the user manually updates the RGB of a named color in the assets folder
+5. Test on a larger project to see what will happen
+6. Test integrated with Xcode's build phase script
+7. Distribute: Homebrew and others
+8. Add tests
 
 
 # Contributing
