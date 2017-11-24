@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D879B3DB1FC76C7A0095C592 /* CommandLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D879B3D81FC76C7A0095C592 /* CommandLine.swift */; };
+		D879B3DC1FC76C7A0095C592 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = D879B3D91FC76C7A0095C592 /* Option.swift */; };
+		D879B3DD1FC76C7A0095C592 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D879B3DA1FC76C7A0095C592 /* StringExtensions.swift */; };
 		D89E2EE61FC1B10800CDC51C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E2EE51FC1B10800CDC51C /* main.swift */; };
 		D89E2EED1FC1B26200CDC51C /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E2EEC1FC1B26200CDC51C /* ColorData.swift */; };
 		D89E2F0D1FC1B34F00CDC51C /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E2F081FC1B34F00CDC51C /* Document.swift */; };
@@ -35,6 +38,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D879B3D81FC76C7A0095C592 /* CommandLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLine.swift; sourceTree = "<group>"; };
+		D879B3D91FC76C7A0095C592 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		D879B3DA1FC76C7A0095C592 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		D89E2EE21FC1B10800CDC51C /* SwiftColorGen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftColorGen; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89E2EE51FC1B10800CDC51C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D89E2EEC1FC1B26200CDC51C /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
@@ -67,6 +73,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D879B3D71FC76C5B0095C592 /* CommandLineKit */ = {
+			isa = PBXGroup;
+			children = (
+				D879B3D81FC76C7A0095C592 /* CommandLine.swift */,
+				D879B3D91FC76C7A0095C592 /* Option.swift */,
+				D879B3DA1FC76C7A0095C592 /* StringExtensions.swift */,
+			);
+			path = CommandLineKit;
+			sourceTree = "<group>";
+		};
 		D89E2ED91FC1B10800CDC51C = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +147,7 @@
 		D89E2F1B1FC1B77700CDC51C /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D879B3D71FC76C5B0095C592 /* CommandLineKit */,
 				D89E2EFB1FC1B31D00CDC51C /* AEXML */,
 			);
 			path = Libs;
@@ -219,7 +236,10 @@
 				D89E2EE61FC1B10800CDC51C /* main.swift in Sources */,
 				D89E2EED1FC1B26200CDC51C /* ColorData.swift in Sources */,
 				D89E2F0E1FC1B34F00CDC51C /* Element.swift in Sources */,
+				D879B3DB1FC76C7A0095C592 /* CommandLine.swift in Sources */,
 				D89E2F0F1FC1B34F00CDC51C /* Error.swift in Sources */,
+				D879B3DC1FC76C7A0095C592 /* Option.swift in Sources */,
+				D879B3DD1FC76C7A0095C592 /* StringExtensions.swift in Sources */,
 				D89E2F1A1FC1B76700CDC51C /* StoryboardManager.swift in Sources */,
 				D89E2F101FC1B34F00CDC51C /* Options.swift in Sources */,
 				D89E2F0D1FC1B34F00CDC51C /* Document.swift in Sources */,
