@@ -93,7 +93,8 @@ struct StoryboardManager {
     // Write the UIColor extension output file
     static func writeOutputfile(path: String, colors: Set<ColorData>) {
         let generatorData = ColorManager.getColorsForGenerator(colors: colors)
-        var output = "// Don't change. Auto generated file. SwiftColorGen\n\n"
+        var output = "// Don't change. Auto generated file. SwiftColorGen\n"
+        output += "import UIKit\n\n"
         output += "extension UIColor {\n"
         generatorData.forEach { data in
             output += "\t/// Color #\(data.color.name)\n"
@@ -105,6 +106,7 @@ struct StoryboardManager {
             output += "\t\treturn UIColor(named: \"\(data.assetName)\") ?? UIColor.white\n"
             output += "\t}\n\n"
         }
+        output = String(output.prefix(output.count-1))
         output += "}\n"
         try? output.write(to: URL(fileURLWithPath: path), atomically: false, encoding: .utf8)
     }
