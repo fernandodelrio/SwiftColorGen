@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/fernandodelrio/SwiftColorGen"
   s.screenshots  = "https://raw.githubusercontent.com/fernandodelrio/SwiftColorGen/master/Resources/Storyboard0.3.0.png", "https://raw.githubusercontent.com/fernandodelrio/SwiftColorGen/master/Resources/Assets0.3.0.png", "https://raw.githubusercontent.com/fernandodelrio/SwiftColorGen/master/Resources/Swift0.3.0.png"
   s.license      = {:type => "MIT", :file => "LICENSE.md"}
-  s.author             = { "Fernando del Rio" => "fernandomdr@gmail.com" }
+  s.author       = { "Fernando del Rio" => "fernandomdr@gmail.com" }
   s.ios.deployment_target = "8.0"
   s.source = { :http => "https://github.com/fernandodelrio/SwiftColorGen/releases/download/#{s.version}/swiftcg-#{s.version}.zip" }
   s.preserve_paths = "swiftcg"
