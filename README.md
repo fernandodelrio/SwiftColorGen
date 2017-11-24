@@ -65,26 +65,33 @@ $ chmod +x test.sh
 $ ./test.sh
 ```
 
-You can call the CLI using the terminal, but you can also call it using Xcode. To do that, just edit the scheme and add **Arguments Passed On Launch**:
+# Installation
+You can install the tool using CocoaPods and then add a **Build Phase** step, that runs SwiftColorGen every time the project is built.
 
-Example:
-```
--b $SRCROOT/Example
--a $SRCROOT/Example/Assets.xcassets
--o $SRCROOT/Example/Generated.swift
-```
+### CocoaPods
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
 
-Notice, in this case you need to provide the full path, because the current path will be the Derivated Data folder when you run using Xcode.
+1. To integrate SwiftColorGen into your Xcode project, specify it in your Podfile:
+```ruby
+pod 'SwiftColorGen'
+```
+2. Install the dependencies:
+
+```shell
+$ pod install
+```
+3. In Xcode: Click on your project in the file list, choose your target under TARGETS, click the **Build Phases** tab and add a **New Run Script Phase** by clicking the little plus icon in the top left. Drag the **New Run Script Phase** above the **Compile Sources phase** and below **Check Pods Manifest.lock**, expand it and then call the tool with something like that:
+```shell
+"$PODS_ROOT/SwiftColorGen/swiftcg" -b "$SRCROOT" -o "$SRCROOT/CustomColors.swift"
+```
+4. Build your project and it's done. Remember to add the generated Swift file to Xcode, if it's not already there.
 
 # TODO
 1. Add support to other color spaces than the sRGB
 2. Reduce the number of changes in the storyboards
 3. Update the color name and storyboard/.xcassets references, when the user manually updates the RGB of a named color in the assets folder
 4. Test on a larger project to see what will happen
-5. Test integrated with Xcode's build phase script
-6. Distribute: Homebrew and others
-7. Add tests
-
+5. Add tests
 
 # Contributing
 This project still on a initial stage of development. Feel free to contribute by testing it and reporting bugs. If you want to help developing it, checkout the TODO list. If you made some enhancement, open a pull request.
