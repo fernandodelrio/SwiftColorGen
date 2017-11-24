@@ -96,7 +96,12 @@ struct StoryboardManager {
         var output = "// Don't change. Auto generated file. SwiftColorGen\n\n"
         output += "extension UIColor {\n"
         generatorData.forEach { data in
-            output += "\tclass func gen\(data.outputName)() -> UIColor {\n"
+            output += "\t/// Color #\(data.color.name)\n"
+            if data.outputNeedsPrefix {
+                output += "\tclass func gen\(data.outputName)() -> UIColor {\n"
+            } else {
+                output += "\tclass func \(data.outputName)Color() -> UIColor {\n"
+            }
             output += "\t\treturn UIColor(named: \"\(data.assetName)\") ?? UIColor.white\n"
             output += "\t}\n\n"
         }

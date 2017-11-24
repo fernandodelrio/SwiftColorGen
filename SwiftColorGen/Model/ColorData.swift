@@ -34,17 +34,18 @@ class ColorData: Hashable {
     var assetName: String {
         let alphaValue = Int(255*Double(alpha))
         if alpha == 1.0 {
-            return name.replacingOccurrences(of: "(\(alphaValue))", with: "")
+            return name.replacingOccurrences(of: " (\(alphaValue) )", with: "")
         } else {
             return name
         }
     }
+    
     var outputName: String {
         let alphaValue = Int(255*Double(alpha))
         if alpha == 1.0 {
-            return name.replacingOccurrences(of: "(\(alphaValue))", with: "")
+            return name.replacingOccurrences(of: " (alpha \(alphaValue))", with: "")
         } else {
-            return name.replacingOccurrences(of: "(\(alphaValue))", with: "_alpha_\(alphaValue)")
+            return name.replacingOccurrences(of: " (alpha \(alphaValue))", with: "Alpha\(alphaValue)")
         }
     }
 
