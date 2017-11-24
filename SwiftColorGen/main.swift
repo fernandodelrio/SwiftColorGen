@@ -35,10 +35,7 @@
 import Foundation
 
 func main() {
-    guard let args = CLIManager.getArgs(arguments: CommandLine.arguments) else {
-        print("Invalid arguments")
-        exit(1)
-    }
+    let args = CLIManager.getArgs()
     var allColors: Set<ColorData> = Set<ColorData>()
     // Gets the list of storyboards
     let storyboards = StoryboardManager.getStoryboards(baseFolder: args.baseFolder)

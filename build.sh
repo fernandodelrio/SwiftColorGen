@@ -6,6 +6,9 @@ SwiftColorGen/Libs/AEXML/Element.swift \
 SwiftColorGen/Libs/AEXML/Error.swift \
 SwiftColorGen/Libs/AEXML/Options.swift \
 SwiftColorGen/Libs/AEXML/Parser.swift \
+SwiftColorGen/Libs/CommandLineKit/CommandLine.swift \
+SwiftColorGen/Libs/CommandLineKit/Option.swift \
+SwiftColorGen/Libs/CommandLineKit/StringExtensions.swift \
 SwiftColorGen/Extensions/AEXMLElement.swift \
 SwiftColorGen/Model/ColorData.swift \
 SwiftColorGen/Model/WebColors.swift \
