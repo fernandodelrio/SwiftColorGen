@@ -88,7 +88,7 @@ struct ColorManager {
                     .name
         if colorData.alpha < 1.0 {
             return (assetName: name + " (alpha \(Int(255*Double(colorData.alpha))))",
-                    outputName: name + "_alpha\(Int(255*Double(colorData.alpha)))")
+                    outputName: name + "Alpha\(Int(255*Double(colorData.alpha)))")
         } else {
             return (assetName: name, outputName: name)
         }
@@ -125,10 +125,14 @@ struct ColorManager {
     
     static func getColorsForGenerator(colors: Set<ColorData>) -> [(color: ColorData,
                                                                    assetName: String,
-                                                                   outputName: String)] {
+                                                                   outputName: String,
+                                                                   outputNeedsPrefix: Bool)] {
         let colors = Array(colors)
         var names: [String] = []
-        var result: [(color: ColorData, assetName: String, outputName: String)] = []
+        var result: [(color: ColorData,
+                      assetName: String,
+                      outputName: String,
+                      outputNeedsPrefix: Bool)] = []
         colors.forEach { color in
             guard let closestData = getClosestColorName(colorData: color) else {
                 return
@@ -136,11 +140,13 @@ struct ColorManager {
             if names.contains(closestData.outputName) {
                 result.append((color: color,
                                assetName: color.assetName,
-                               outputName: color.outputName))
+                               outputName: color.outputName,
+                               outputNeedsPrefix: true))
             } else {
                 result.append((color: color,
                                assetName: closestData.assetName,
-                               outputName: closestData.outputName))
+                               outputName: closestData.outputName,
+                               outputNeedsPrefix: false))
             }
             names.append(closestData.outputName)
         }
