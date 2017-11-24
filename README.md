@@ -10,7 +10,7 @@ The rules for naming the colors dinamically:
 - If the alpha value is less than 255, an "alpha suffix" will be appended to the color name, to avoid name collision
 - If two RGB's are close to the same web color, the hex of the RGB will be used to avoid name collision
 
-SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML.
+SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML and [CommandLine] https://github.com/jatoben/CommandLine to provide the CLI interface.
 
 # Screenshots
 That's the result of the code generation:
@@ -41,15 +41,21 @@ $ chmod +x build.sh
 $ ./build.sh
 ```
 
-Then call the CLI passing:
-1. The project's base folder (that contains the storyboard)
-2. The .xcassets folder (where the colors will be created)
-3. The swift output file (where the UIColor's extension will be created)
-Obs: Always use absolute paths when passing the arguments. If you pass a relative path, it won't work
+Then call the binary passing with the appropriate parameters:
+
+```shell
+Usage: ./swiftcg [options]
+-o --outputFile (required):
+    Path to the output Swift file
+-b --baseFolder (optional):
+    Path to the folder where the storyboards are located. Defaults to the current working directory
+-a --assetsFolder (optional):
+    Path to the assets folder. Defaults to the first .xcassets found under the base folder
+ ```
  
 Example:
 ```shell
-$ ./swiftcg baseFolder=$PWD/Example assetsFolder=$PWD/Example/Assets.xcassets outputFile=$PWD/Example/Generated.swift
+$ ./swiftcg -o Example/Generated.swift
 ```
 
 To test with the Example provided, call the **test.sh** script (it will update the files inside the Example folder):
@@ -62,20 +68,21 @@ You can call the CLI using the terminal, but you can also call it using Xcode. T
 
 Example:
 ```
-baseFolder=$SRCROOT/Example
-assetsFolder=$SRCROOT/Example/Assets.xcassets
-outputFile=$SRCROOT/Example/Generated.swift
+-b $SRCROOT/Example
+-a $SRCROOT/Example/Assets.xcassets
+-o $SRCROOT/Example/Generated.swift
 ```
+
+Notice, in this case you need to provide the full path, because the current path will be the Derivated Data folder when you run using Xcode.
 
 # TODO
 1. Add support to other color spaces than the sRGB
-2. Improve the CLI: Pass parameters in a more clean way. Accept relative paths
-3. Reduce the number of changes in the storyboards
-4. Update the color name and storyboard/.xcassets references, when the user manually updates the RGB of a named color in the assets folder
-5. Test on a larger project to see what will happen
-6. Test integrated with Xcode's build phase script
-7. Distribute: Homebrew and others
-8. Add tests
+2. Reduce the number of changes in the storyboards
+3. Update the color name and storyboard/.xcassets references, when the user manually updates the RGB of a named color in the assets folder
+4. Test on a larger project to see what will happen
+5. Test integrated with Xcode's build phase script
+6. Distribute: Homebrew and others
+7. Add tests
 
 
 # Contributing
