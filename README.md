@@ -8,7 +8,8 @@ Please notice, this tool still under development. It's on a validation phase, wh
 The rules for naming the colors dinamically:
 - The closest web color name (https://en.wikipedia.org/wiki/Web_colors) is considered to name the color
 - If the alpha value is less than 255, an "alpha suffix" will be appended to the color name, to avoid name collision
-- If two RGB's are close to the same web color, the hex of the RGB will be used to avoid name collision
+- If two RGB's are close to the same web color, the name still will be used if they have different alphas
+- If two RGB's are close to the same web color and they also have the same alpha, the hex of the RGB will be used to avoid name collision
 
 SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML and [CommandLine](https://github.com/jatoben/CommandLine) to provide the CLI interface.
 
@@ -16,20 +17,20 @@ SwiftColorGen is written in Swift and requires Swift to run. The project uses [A
 That's the result of the code generation:
 
 ### The generated named colors in the Storyboard
-![Storyboard](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Storyboard0.2.0.png)
+![Storyboard](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Storyboard0.3.0.png)
 
 ### The generated colors in the Assets catalog
-![Assets Catalog](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Assets0.2.0.png)
+![Assets Catalog](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Assets0.3.0.png)
 
 ### The generated Swift file
-![Swift file](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Swift0.2.0.png)
+![Swift file](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Swift0.3.0.png)
 
 You can also create your own extensions in a separated file to give a more semantic name to the colors:
 
 ```swift
 extension UIColor {
     class func defaultTextColor() -> UIColor {
-        return .genDeepPink()
+        return .deepPinkColor()
     }
 }
 ```
