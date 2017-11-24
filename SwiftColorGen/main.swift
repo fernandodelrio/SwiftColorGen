@@ -24,30 +24,39 @@
 // You can call the CLI using the terminal, but you can also call
 //   it using Xcode. To do that, just edit the scheme and add
 //   'Arguments Passed On Launch':
-// baseFolder=$SRCROOT/Example
-// assetsFolder=$SRCROOT/Example/Assets.xcassets
-// outputFile=$SRCROOT/Example/Generated.swift
-//
-// Obs: Always use absolute paths when passing the arguments.
-//   If you pass a relative path, it won't work
+//      -b $SRCROOT/Example
+//      -a $SRCROOT/Example/Assets.xcassets
+//      -o $SRCROOT/Example/Generated.swift
 //
 
 import Foundation
 
 func main() {
     let args = CLIManager.getArgs()
-    var allColors: Set<ColorData> = Set<ColorData>()
+    let allColors = getAllColors(args: args)
+    if !allColors.isEmpty {
+        writeAllColors(allColors, args: args)
+    }
+    
+}
+
+func getAllColors(args: (baseFolder: String, assetsFolder: String, outputFile: String)) -> Set<ColorData> {
     // Gets the list of storyboards
     let storyboards = StoryboardManager.getStoryboards(baseFolder: args.baseFolder)
+    var allColors: Set<ColorData> = Set<ColorData>()
     storyboards.forEach { storyboard in
         // Gets the list of colors
         let colors = StoryboardManager.readStoryboard(path: storyboard)
         // Place all colors in a set to avoid duplicates
         allColors = allColors.union(colors)
     }
-    if allColors.isEmpty {
-        return
-    }
+    return allColors
+}
+
+func writeAllColors(_ allColors: Set<ColorData>,
+                    args: (baseFolder: String, assetsFolder: String, outputFile: String)) {
+    // Gets the list of storyboards
+    let storyboards = StoryboardManager.getStoryboards(baseFolder: args.baseFolder)
     storyboards.forEach { storyboard in
         // Updates the storyboard, settings the colors
         let xml = StoryboardManager.updateStoryboard(path: storyboard,
