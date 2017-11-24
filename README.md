@@ -10,7 +10,7 @@ The rules for naming the colors dinamically:
 - If the alpha value is less than 255, an "alpha suffix" will be appended to the color name, to avoid name collision
 - If two RGB's are close to the same web color, the hex of the RGB will be used to avoid name collision
 
-SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML and [CommandLine] https://github.com/jatoben/CommandLine to provide the CLI interface.
+SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML and [CommandLine](https://github.com/jatoben/CommandLine) to provide the CLI interface.
 
 # Screenshots
 That's the result of the code generation:
