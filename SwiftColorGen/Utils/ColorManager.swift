@@ -41,30 +41,28 @@ struct ColorManager {
         let renamed = assets.filter { $0.type == .customRenamed }
         let added = assets.filter { $0.type == .customAdded }
         func read(xml: AEXMLElement) {
-            guard xml.name == "color",
-               let name = xml.attributes["name"] else {
-                return
+            if xml.name == "color",
+               let name = xml.attributes["name"]  {
+                let originalResult = original.filter { $0.originalName == name }
+                let renamedResult = renamed.filter { $0.originalName == name }
+                let addedResult = added.filter { $0.currentName == name }
+                if originalResult.count == 1, let originalAsset = originalResult.first {
+                    ColorManager.resetColor(xml: xml, asset: originalAsset)
+                } else if renamedResult.count == 1, let renamedAsset = renamedResult.first {
+                    xml.attributes["name"] = renamedAsset.currentName
+                } else if addedResult.count == 1, let addedAsset = addedResult.first {
+                    xml.attributes["name"] = addedAsset.currentName
+                } else {
+                    // Not modified
+                }
             }
-            let originalResult = original.filter { $0.originalName == name }
-            if originalResult.count == 1, let originalAsset = originalResult.first {
-                ColorManager.resetColor(xml: xml, asset: originalAsset)
-                return
-            }
-            let renamedResult = renamed.filter { $0.originalName == name }
-            if renamedResult.count == 1, let renamedAsset = renamedResult.first {
-                xml.attributes["name"] = renamedAsset.currentName
-                return
-            }
-            let addedResult = added.filter { $0.currentName == name }
-            if addedResult.count == 1, let addedAsset = addedResult.first {
-                xml.attributes["name"] = addedAsset.currentName
-            }
-        }
-        if xml.name != "namedColor" {
-            for child in xml.children {
-                read(xml: child)
+            if xml.name != "namedColor" {
+                for child in xml.children {
+                    read(xml: child)
+                }
             }
         }
+        read(xml: xml)
     }
     
     static func updateColors(xml: AEXMLElement, colors: Set<ColorData>) {
