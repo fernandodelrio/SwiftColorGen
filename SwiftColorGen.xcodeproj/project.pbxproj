@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D83734001FC8A44800B59423 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83733FF1FC8A44800B59423 /* AssetManager.swift */; };
+		D83734021FC8A56500B59423 /* OutputFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83734011FC8A56500B59423 /* OutputFileManager.swift */; };
+		D83734041FC8B5B800B59423 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83734031FC8B5B800B59423 /* Asset.swift */; };
 		D879B3DB1FC76C7A0095C592 /* CommandLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D879B3D81FC76C7A0095C592 /* CommandLine.swift */; };
 		D879B3DC1FC76C7A0095C592 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = D879B3D91FC76C7A0095C592 /* Option.swift */; };
 		D879B3DD1FC76C7A0095C592 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D879B3DA1FC76C7A0095C592 /* StringExtensions.swift */; };
@@ -38,6 +41,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D83733FF1FC8A44800B59423 /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
+		D83734011FC8A56500B59423 /* OutputFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputFileManager.swift; sourceTree = "<group>"; };
+		D83734031FC8B5B800B59423 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		D879B3D81FC76C7A0095C592 /* CommandLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLine.swift; sourceTree = "<group>"; };
 		D879B3D91FC76C7A0095C592 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		D879B3DA1FC76C7A0095C592 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -140,6 +146,8 @@
 				D89E2F191FC1B76700CDC51C /* StoryboardManager.swift */,
 				D89E2F1D1FC1B90900CDC51C /* PathManager.swift */,
 				D89E2F1F1FC1C2AB00CDC51C /* CLIManager.swift */,
+				D83733FF1FC8A44800B59423 /* AssetManager.swift */,
+				D83734011FC8A56500B59423 /* OutputFileManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -158,6 +166,7 @@
 			children = (
 				D89E2EEC1FC1B26200CDC51C /* ColorData.swift */,
 				D8C9BC441FC2FE1E007261A7 /* WebColors.swift */,
+				D83734031FC8B5B800B59423 /* Asset.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,9 +244,12 @@
 				D89E2F1E1FC1B90900CDC51C /* PathManager.swift in Sources */,
 				D89E2EE61FC1B10800CDC51C /* main.swift in Sources */,
 				D89E2EED1FC1B26200CDC51C /* ColorData.swift in Sources */,
+				D83734021FC8A56500B59423 /* OutputFileManager.swift in Sources */,
 				D89E2F0E1FC1B34F00CDC51C /* Element.swift in Sources */,
+				D83734001FC8A44800B59423 /* AssetManager.swift in Sources */,
 				D879B3DB1FC76C7A0095C592 /* CommandLine.swift in Sources */,
 				D89E2F0F1FC1B34F00CDC51C /* Error.swift in Sources */,
+				D83734041FC8B5B800B59423 /* Asset.swift in Sources */,
 				D879B3DC1FC76C7A0095C592 /* Option.swift in Sources */,
 				D879B3DD1FC76C7A0095C592 /* StringExtensions.swift in Sources */,
 				D89E2F1A1FC1B76700CDC51C /* StoryboardManager.swift in Sources */,

@@ -13,12 +13,12 @@ struct ColorManager {
         var colors: Set<ColorData> = Set<ColorData>()
         func read(xml: AEXMLElement) {
             if xml.name == "color",
-                let colorSpace = xml.attributes["customColorSpace"],
-                colorSpace == "sRGB",
-                let red = xml.attributes["red"],
-                let green = xml.attributes["green"],
-                let blue = xml.attributes["blue"],
-                let alpha = xml.attributes["alpha"] {
+               let colorSpace = xml.attributes["customColorSpace"],
+               colorSpace == "sRGB",
+               let red = xml.attributes["red"],
+               let green = xml.attributes["green"],
+               let blue = xml.attributes["blue"],
+               let alpha = xml.attributes["alpha"] {
                 let color = ColorData()
                 color.red = Double(red) ?? 0.0
                 color.green = Double(green) ?? 0.0
@@ -34,6 +34,37 @@ struct ColorManager {
         }
         read(xml: xml)
         return colors
+    }
+    
+    static func resetColors(xml: AEXMLElement, assets: [Asset]) {
+        let original = assets.filter { $0.type == .original }
+        let renamed = assets.filter { $0.type == .customRenamed }
+        let added = assets.filter { $0.type == .customAdded }
+        func read(xml: AEXMLElement) {
+            guard xml.name == "color",
+               let name = xml.attributes["name"] else {
+                return
+            }
+            let originalResult = original.filter { $0.originalName == name }
+            if originalResult.count == 1, let originalAsset = originalResult.first {
+                ColorManager.resetColor(xml: xml, asset: originalAsset)
+                return
+            }
+            let renamedResult = renamed.filter { $0.originalName == name }
+            if renamedResult.count == 1, let renamedAsset = renamedResult.first {
+                xml.attributes["name"] = renamedAsset.currentName
+                return
+            }
+            let addedResult = added.filter { $0.currentName == name }
+            if addedResult.count == 1, let addedAsset = addedResult.first {
+                xml.attributes["name"] = addedAsset.currentName
+            }
+        }
+        if xml.name != "namedColor" {
+            for child in xml.children {
+                read(xml: child)
+            }
+        }
     }
     
     static func updateColors(xml: AEXMLElement, colors: Set<ColorData>) {
@@ -74,7 +105,20 @@ struct ColorManager {
         xml.attributes["name"] = name
     }
     
-    static func getClosestColorName(colorData: ColorData) -> (assetName: String, outputName: String)? {
+    private static func resetColor(xml: AEXMLElement, asset: Asset) {
+        guard let color = asset.color else {
+            return
+        }
+        xml.attributes["red"] = String(color.red)
+        xml.attributes["green"] = String(color.green)
+        xml.attributes["blue"] = String(color.blue)
+        xml.attributes["alpha"] = String(color.alpha)
+        xml.attributes["colorSpace"] = "custom"
+        xml.attributes["customColorSpace"] = "sRGB"
+        xml.attributes["name"] = nil
+    }
+    
+    private static func getClosestColorName(colorData: ColorData) -> (assetName: String, outputName: String)? {
         guard let webColors = getWebColors() else {
             return nil
         }
@@ -95,7 +139,7 @@ struct ColorManager {
         }
     }
     
-    static func getWebColors() -> [(name: String, colorData: ColorData)]? {
+    private static func getWebColors() -> [(name: String, colorData: ColorData)]? {
         guard let data = WebColor.values.data(using: .utf8) else {
             return nil
         }
@@ -117,7 +161,7 @@ struct ColorManager {
         }
     }
     
-    static func getColorDistance(from color1: ColorData, to color2: ColorData) -> Double {
+    private static func getColorDistance(from color1: ColorData, to color2: ColorData) -> Double {
         let rDistance = fabs(color1.red - color2.red)
         let gDistance = fabs(color1.green - color2.green)
         let bDistance = fabs(color1.blue - color2.blue)

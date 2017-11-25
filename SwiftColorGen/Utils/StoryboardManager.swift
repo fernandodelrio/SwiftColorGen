@@ -73,41 +73,85 @@ struct StoryboardManager {
         }
     }
     
+    static func removeOriginalResources(path: String, assets: [Asset]) {
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
+            return
+        }
+        guard let xml = try? AEXMLDocument(xml: data, options: AEXMLOptions()) else {
+            return
+        }
+        guard let resources = xml.root.getChild(name: "resources") else {
+            return
+        }
+        let original = assets.filter { $0.type == .original }
+        let deletedIndexes = resources.children.enumerated()
+            .map { (index, child) -> (Int, Bool) in
+                guard child.name == "namedColor" else {
+                    return (index, false)
+                }
+                let name = child.attributes["name"] ?? ""
+                let matched = original.filter { $0.currentName == name }.count > 0
+                return (index, matched)
+            }
+            .filter { $0.1 }
+            .map { $0.0 }
+        deletedIndexes.forEach { resources.children.remove(at: $0) }
+    }
+    
+    static func updateCustomResources(path: String, assets: [Asset]) {
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
+            return
+        }
+        guard let xml = try? AEXMLDocument(xml: data, options: AEXMLOptions()) else {
+            return
+        }
+        guard let resources = xml.root.getChild(name: "resources") else {
+            return
+        }
+        let renamed = assets.filter { $0.type == .customRenamed }
+        let added = assets.filter { $0.type == .customAdded }
+        resources.children.forEach { child in
+            guard child.name == "namedColor" else {
+                return
+            }
+            let name = child.attributes["name"] ?? ""
+            var customAsset: Asset?
+            if let renamedAsset = (renamed.filter { $0.originalName == name }).first {
+                child.attributes["name"] = renamedAsset.currentName
+                customAsset = renamedAsset
+            }
+            if let addedAsset = (added.filter { $0.currentName == name }).first {
+                customAsset = addedAsset
+            }
+            guard let asset = customAsset else {
+                return
+            }
+            guard let color = child.children.first, color.name == "color" else {
+                return
+            }
+            guard color.attributes["colorSpace"] == "custom",
+                color.attributes["customColorSpace"] == "sRGB" else {
+                    return
+            }
+            color.attributes["red"] = String(asset.color?.red ?? 0.0)
+            color.attributes["green"] = String(asset.color?.green ?? 0.0)
+            color.attributes["blue"] = String(asset.color?.blue ?? 0.0)
+            color.attributes["alpha"] = String(asset.color?.alpha ?? 0.0)
+        }
+    }
+    
+    static func resetColors(path: String, assets: [Asset]) {
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
+            return
+        }
+        guard let xml = try? AEXMLDocument(xml: data, options: AEXMLOptions()) else {
+            return
+        }
+        ColorManager.resetColors(xml: xml.root, assets: assets)
+    }
+    
     // Write the updated storyboard to file
     static func writeStoryboard(xml: AEXMLDocument, path: String) {
         try? xml.xml.write(to: URL(fileURLWithPath: path), atomically: false, encoding: .utf8)
-    }
-    
-    // Write all colors to the .xcassets folder
-    static func writeColorAssets(path: String, colors: Set<ColorData>) {
-        let generatorData = ColorManager.getColorsForGenerator(colors: colors)
-        generatorData.forEach { data in
-            let colorPath = "\(path)/\(data.assetName).colorset"
-            let contentsPath = "\(colorPath)/Contents.json"
-            try? FileManager.default.createDirectory(at: URL(fileURLWithPath: colorPath), withIntermediateDirectories: false, attributes: nil)
-            let data = "{\"info\":{\"version\":1,\"author\":\"xcode\"},\"colors\":[{\"idiom\":\"universal\",\"color\":{\"color-space\":\"srgb\",\"components\":{\"red\":\"\(data.color.red)\",\"alpha\":\"\(data.color.alpha)\",\"blue\":\"\(data.color.blue)\",\"green\":\"\(data.color.green)\"}}}]}"
-            try? data.write(to: URL(fileURLWithPath: contentsPath), atomically: false, encoding: .utf8)
-        }
-    }
-    
-    // Write the UIColor extension output file
-    static func writeOutputfile(path: String, colors: Set<ColorData>) {
-        let generatorData = ColorManager.getColorsForGenerator(colors: colors)
-        var output = "// Don't change. Auto generated file. SwiftColorGen\n"
-        output += "import UIKit\n\n"
-        output += "extension UIColor {\n"
-        generatorData.forEach { data in
-            output += "\t/// Color #\(data.color.name)\n"
-            if data.outputNeedsPrefix {
-                output += "\tclass func gen\(data.outputName)() -> UIColor {\n"
-            } else {
-                output += "\tclass func \(data.outputName)Color() -> UIColor {\n"
-            }
-            output += "\t\treturn UIColor(named: \"\(data.assetName)\") ?? UIColor.white\n"
-            output += "\t}\n\n"
-        }
-        output = String(output.prefix(output.count-1))
-        output += "}\n"
-        try? output.write(to: URL(fileURLWithPath: path), atomically: false, encoding: .utf8)
     }
 }
