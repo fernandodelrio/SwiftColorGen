@@ -36,8 +36,8 @@ func main() {
     let assets = AssetManager.getAssetColors(assetsFolder: args.assetsFolder)
     cleanColors(args: args, assets: assets)
     let oldColors = assets
-                        .filter { $0.type == .original }
-                        .map { $0.color ?? ColorData() }
+                      .filter { $0.type == .original }
+                      .map { $0.color ?? ColorData() }
     
     let newColors = getNewColors(args: args)
     let allColors = newColors.union(oldColors)
