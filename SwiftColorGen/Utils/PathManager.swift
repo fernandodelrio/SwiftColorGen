@@ -8,6 +8,10 @@
 import Foundation
 
 struct PathManager {
+    static func isValidColorset(path: String) -> Bool {
+        return path.hasSuffix(".colorset")
+    }
+    
     // Filter storyboard files, avoid messing with code
     //   inside Cocoa Pods, Carthage and Swift PM
     static func isValidStoryboard(path: String) -> Bool {

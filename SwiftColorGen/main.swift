@@ -33,14 +33,21 @@ import Foundation
 
 func main() {
     let args = CLIManager.getArgs()
-    let allColors = getAllColors(args: args)
+    let assets = AssetManager.getAssetColors(assetsFolder: args.assetsFolder)
+    cleanColors(args: args, assets: assets)
+    let oldColors = assets
+                        .filter { $0.type == .original }
+                        .map { $0.color ?? ColorData() }
+    
+    let newColors = getNewColors(args: args)
+    let allColors = newColors.union(oldColors)
     if !allColors.isEmpty {
         writeAllColors(allColors, args: args)
     }
     
 }
 
-func getAllColors(args: (baseFolder: String, assetsFolder: String, outputFile: String)) -> Set<ColorData> {
+func getNewColors(args: (baseFolder: String, assetsFolder: String, outputFile: String)) -> Set<ColorData> {
     // Gets the list of storyboards
     let storyboards = StoryboardManager.getStoryboards(baseFolder: args.baseFolder)
     var allColors: Set<ColorData> = Set<ColorData>()
@@ -68,9 +75,20 @@ func writeAllColors(_ allColors: Set<ColorData>,
         StoryboardManager.writeStoryboard(xml: xml, path: storyboard)
     }
     // Write the colors to the .xcassets folder
-    StoryboardManager.writeColorAssets(path: args.assetsFolder, colors: allColors)
+    AssetManager.writeColorAssets(path: args.assetsFolder, colors: allColors)
     // Wirte the generated UIColor extension to file
-    StoryboardManager.writeOutputfile(path: args.outputFile, colors: allColors)
+    OutputFileManager.writeOutputfile(path: args.outputFile, colors: allColors)
+}
+
+func cleanColors(args: (baseFolder: String, assetsFolder: String, outputFile: String), assets: [Asset]) {
+    let storyboards = StoryboardManager.getStoryboards(baseFolder: args.baseFolder)
+    storyboards.forEach { storyboard in
+        StoryboardManager.removeOriginalResources(path: storyboard, assets: assets)
+        StoryboardManager.updateCustomResources(path: storyboard, assets: assets)
+        StoryboardManager.resetColors(path: storyboard, assets: assets)
+        AssetManager.deleteColorsets(assets: assets)
+        AssetManager.updateCustomJson(assets: assets)
+    }
 }
 
 main()
