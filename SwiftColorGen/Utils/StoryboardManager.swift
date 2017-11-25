@@ -20,14 +20,19 @@ struct StoryboardManager {
         return storyboards
     }
     
-    // Read the storyboard returning the colors found
-    static func readStoryboard(path: String) -> Set<ColorData> {
+    static func readStoryboard(path: String) -> AEXMLDocument {
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
-            return Set<ColorData>()
+            return AEXMLDocument()
         }
         guard let xml = try? AEXMLDocument(xml: data, options: AEXMLOptions()) else {
-            return Set<ColorData>()
+            return AEXMLDocument()
         }
+        return xml
+    }
+    
+    // Read the storyboard returning the colors found
+    static func readStoryboardColors(path: String) -> Set<ColorData> {
+        let xml = readStoryboard(path: path)
         return ColorManager.getColors(xml: xml.root)
     }
     
@@ -73,38 +78,22 @@ struct StoryboardManager {
         }
     }
     
-    static func removeOriginalResources(path: String, assets: [Asset]) {
-        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
-            return
-        }
-        guard let xml = try? AEXMLDocument(xml: data, options: AEXMLOptions()) else {
-            return
-        }
+    static func removeOriginalResources(xml: AEXMLDocument, assets: [Asset]) {
         guard let resources = xml.root.getChild(name: "resources") else {
             return
         }
         let original = assets.filter { $0.type == .original }
-        let deletedIndexes = resources.children.enumerated()
-            .map { (index, child) -> (Int, Bool) in
-                guard child.name == "namedColor" else {
-                    return (index, false)
-                }
-                let name = child.attributes["name"] ?? ""
-                let matched = original.filter { $0.currentName == name }.count > 0
-                return (index, matched)
+        let valid = resources.children.filter { child in
+            guard child.name == "namedColor" else {
+                return false
             }
-            .filter { $0.1 }
-            .map { $0.0 }
-        deletedIndexes.forEach { resources.children.remove(at: $0) }
+            let name = child.attributes["name"] ?? ""
+            return original.filter { $0.currentName == name }.count == 0
+        }
+        resources.children = valid
     }
     
-    static func updateCustomResources(path: String, assets: [Asset]) {
-        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
-            return
-        }
-        guard let xml = try? AEXMLDocument(xml: data, options: AEXMLOptions()) else {
-            return
-        }
+    static func updateCustomResources(xml: AEXMLDocument, assets: [Asset]) {
         guard let resources = xml.root.getChild(name: "resources") else {
             return
         }
@@ -140,13 +129,7 @@ struct StoryboardManager {
         }
     }
     
-    static func resetColors(path: String, assets: [Asset]) {
-        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
-            return
-        }
-        guard let xml = try? AEXMLDocument(xml: data, options: AEXMLOptions()) else {
-            return
-        }
+    static func resetColors(xml: AEXMLDocument, assets: [Asset]) {
         ColorManager.resetColors(xml: xml.root, assets: assets)
     }
     

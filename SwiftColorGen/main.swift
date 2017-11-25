@@ -53,7 +53,7 @@ func getNewColors(args: (baseFolder: String, assetsFolder: String, outputFile: S
     var allColors: Set<ColorData> = Set<ColorData>()
     storyboards.forEach { storyboard in
         // Gets the list of colors
-        let colors = StoryboardManager.readStoryboard(path: storyboard)
+        let colors = StoryboardManager.readStoryboardColors(path: storyboard)
         // Place all colors in a set to avoid duplicates
         allColors = allColors.union(colors)
     }
@@ -83,9 +83,11 @@ func writeAllColors(_ allColors: Set<ColorData>,
 func cleanColors(args: (baseFolder: String, assetsFolder: String, outputFile: String), assets: [Asset]) {
     let storyboards = StoryboardManager.getStoryboards(baseFolder: args.baseFolder)
     storyboards.forEach { storyboard in
-        StoryboardManager.removeOriginalResources(path: storyboard, assets: assets)
-        StoryboardManager.updateCustomResources(path: storyboard, assets: assets)
-        StoryboardManager.resetColors(path: storyboard, assets: assets)
+        let xml = StoryboardManager.readStoryboard(path: storyboard)
+        StoryboardManager.removeOriginalResources(xml: xml, assets: assets)
+        StoryboardManager.updateCustomResources(xml: xml, assets: assets)
+        StoryboardManager.resetColors(xml: xml, assets: assets)
+        StoryboardManager.writeStoryboard(xml: xml, path: storyboard)
         AssetManager.deleteColorsets(assets: assets)
         AssetManager.updateCustomJson(assets: assets)
     }
