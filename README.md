@@ -2,18 +2,26 @@
 A tool that generate code for Swift projects, designed to improve the maintainability of UIColors. 
 
 Please notice, this tool still under development. It's on a validation phase, where I'll test it integrated with existing iOS projects to see how useful it is. Feedbacks are appreciated.
-Also notice this tool not only generates new code, but also updates storyboard files, so **keep your code under versioning tools to avoid any data loss!**
+Also notice this tool not only generates new code, but also updates existing storyboard files, so **keep your code under versioning control to avoid any data loss!**
 
-# Why?
+# Table of contents
+* [Motivation](#motivation)
+* [The solution](#solution)
+* [Demo](#demo)
+* [Using the CLI](#cli)
+* [Installation (CocoaPods)](#installation)
+* [Contributing](#contributing)
+* [License](#license)
+
+# <a id="motivation"></a> Motivation
 
 Manage colors in iOS projects can be challenging. It would be useful to reuse colors in different places in the storyboard and also access them programatically. In code, you can group the colors in one place, but it's common to have the same color redefined in many places in the storyboards. When you need to update a color, you need to remember to replace them everywhere and because of that, it becomes hard to maintain.
 
-Since Xcode 9, we are able to define a color asset in the Assets catalog, allowing us to reuse a color inside the storyboards and access them programatically. Though, this still not perfect:
-1. To access the colors programatically, we use a string with the Asset name. If we change the Asset name we need to remember to replace the strings referring the old asset
-2. If we rename a color asset, we need to manually replace the references to them in the storyboards
-3. In an existing project with no color assets defined, we need to group all the colors in the storyboards, manually create the asset color and replace them everywhere.
-
-# The solution
+Since Xcode 9, we are able to define a color asset in the Assets catalog, allowing us to reuse a color inside the storyboards and access them programatically. Though, this still isn't perfect:
+1. To access the colors programatically, we use a string with the Asset name. If we rename the Asset, we need to remember to replace the strings referring the old asset
+2. If we rename an Asset, we also need to manually replace the references to them in the storyboards
+3. In an existing project with no color assets defined, we need to group all the colors in the storyboards, manually create the asset colors and replace them everywhere.
+# <a id="solution"></a> The solution
 
 **SwiftColorGen** reads all storyboard files to find common **sRGB colors**, it creates them in a **.xcassets** folder and refer them in the storyboard. Then, it creates an **UIColor extension** allowing to access the same colors programatically. It automatically puts a name to the colors found. The name will be the closest webcolor name, measuring the color distance between them. But, the user still can rename the colors and it will keep the storyboards updated.
 
@@ -27,7 +35,7 @@ The rules for naming the colors dinamically:
 
 SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML and [CommandLine](https://github.com/jatoben/CommandLine) to provide the CLI interface.
 
-# Demo
+# <a id="demo"></a> Demo
 That's the result of the code generation:
 
 ### The generated named colors in the Storyboard
@@ -53,7 +61,7 @@ But you can also, simply rename the asset to the name you want, and the tool wil
 
 [![Demo](https://raw.githubusercontent.com/fernandodelrio/SwiftColorGen/master/Resources/Video-thumbnail0.4.0.png)](https://vimeo.com/244528270)
 
-# Using the CLI
+# <a id="cli"></a> Using the CLI
 First, call the **build.sh** script (it will produce the **swiftcg** binary in the same folder):
 ```shell
 $ chmod +x build.sh
@@ -83,7 +91,7 @@ $ chmod +x test.sh
 $ ./test.sh
 ```
 
-# Installation
+# <a id="installation"></a> Installation
 You can install the tool using CocoaPods and then add a **Build Phase** step, that runs SwiftColorGen every time the project is built.
 
 ### CocoaPods
@@ -110,8 +118,8 @@ $ pod install
 3. Test on a larger project to see what will happen
 4. Add tests
 
-# Contributing
+# <a id="contributing"></a> Contributing
 This project still on a initial stage of development. Feel free to contribute by testing it and reporting bugs. If you want to help developing it, checkout the TODO list. If you made some enhancement, open a pull request.
 
-# License
+# <a id="license"></a> License
 SwiftColorGen is available under the MIT license. See the LICENSE file for more info.
