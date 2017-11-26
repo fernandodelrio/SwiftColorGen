@@ -105,9 +105,8 @@ $ pod install
 # TODO
 1. Add support to other color spaces than the sRGB
 2. Reduce the number of changes in the storyboards
-3. Update the color name and storyboard/.xcassets references, when the user manually updates the RGB of a named color in the assets folder
-4. Test on a larger project to see what will happen
-5. Add tests
+3. Test on a larger project to see what will happen
+4. Add tests
 
 # Contributing
 This project still on a initial stage of development. Feel free to contribute by testing it and reporting bugs. If you want to help developing it, checkout the TODO list. If you made some enhancement, open a pull request.
