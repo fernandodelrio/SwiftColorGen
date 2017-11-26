@@ -15,15 +15,15 @@ Also notice this tool not only generates new code, but also updates existing sto
 
 # <a id="motivation"></a> Motivation
 
-Manage colors in iOS projects can be challenging. It would be useful to reuse colors in different places in the storyboard and also access them programatically. In code, you can group the colors in one place, but it's common to have the same color redefined in many places in the storyboards. When you need to update a color, you need to remember to replace them everywhere and because of that, it becomes hard to maintain.
+Manage colors in iOS projects can be challenging. It would be useful to reuse colors in different places in the storyboard and also access them programmatically. In code, you can group the colors in one place, but it's common to have the same color redefined in many places in the storyboards. When you need to update a color, you need to remember to replace them everywhere and because of that, it becomes hard to maintain.
 
-Since Xcode 9, we are able to define a color asset in the Assets catalog, allowing us to reuse a color inside the storyboards and access them programatically. Though, this still isn't perfect:
-1. To access the colors programatically, we use a string with the Asset name. If we rename the Asset, we need to remember to replace the strings referring the old asset
+Since Xcode 9, we are able to define a color asset in the Assets catalog, allowing us to reuse a color inside the storyboards and access them programmatically. Though, this still isn't perfect:
+1. To access the colors programmatically, we use a string with the Asset name. If we rename the Asset, we need to remember to replace the strings referring the old asset
 2. If we rename an Asset, we also need to manually replace the references to them in the storyboards
 3. In an existing project with no color assets defined, we need to group all the colors in the storyboards, manually create the asset colors and replace them everywhere.
 # <a id="solution"></a> The solution
 
-**SwiftColorGen** reads all storyboard files to find common **sRGB colors**, it creates them in a **.xcassets** folder and refer them in the storyboard. Then, it creates an **UIColor extension** allowing to access the same colors programatically. It automatically puts a name to the colors found. The name will be the closest webcolor name, measuring the color distance between them. But, the user still can rename the colors and it will keep the storyboards updated.
+**SwiftColorGen** reads all storyboard files to find common **sRGB colors**, it creates them in a **.xcassets** folder and refer them in the storyboard. Then, it creates an **UIColor extension** allowing to access the same colors programmatically. It automatically puts a name to the colors found. The name will be the closest webcolor name, measuring the color distance between them. But, the user still can rename the colors and it will keep the storyboards updated.
 
 **Currently, the tool only supports the sRGB color space, so remember to select it in the storyboard, when selecting a color and also in the Assets catalog or it may not work properly.**
 
