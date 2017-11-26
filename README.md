@@ -2,8 +2,22 @@
 A tool that generate code for Swift projects, designed to improve the maintainability of UIColors. 
 
 Please notice, this tool still under development. It's on a validation phase, where I'll test it integrated with existing iOS projects to see how useful it is. Feedbacks are appreciated.
+Also notice this tool not only generates new code, but also updates storyboard files, so **keep your code under versioning tools to avoid any data loss!**
 
-**SwiftColorGen** reads all storyboard files to find common **sRGB colors**. Then it creates those colors in a **.xcassets** folder and refer them in the storyboard. Finally it creates a **UIColor extension** allowing to access the same colors programatically.
+# Why?
+
+Manage colors in iOS projects can be challenging. Frequently, you need to reuse colors in different places in the storyboard and also access those colors programatically. In the code you can group the colors in one place, but it's common to have the same color redefined in many places in the storyboards. When you need to update a color, you need to remember to replace them everywhere and because of that it becomes hard to maintain.
+
+Since Xcode 9, we are able to define a color asset in the Assets catalog, allowing us to reuse a color inside the storyboards and access them programatically. Though, this still not perfect:
+1. To access the colors programatically, we use a string with the Asset name, so if we change the Asset name we need to remember to replace the strings referring the old asset
+2. If we rename a color asset, we need to manually replace the references to them in the storyboards and in the code as well
+3. In an existing project with no color assets defined, we need to group all the colors in the storyboards, manually create the assets, and replace them everywhere.
+
+# The solution
+
+**SwiftColorGen** reads all storyboard files to find common **sRGB colors**, it creates them in a **.xcassets** folder and refer them in the storyboard. Finally it creates a **UIColor extension** allowing to access the same colors programatically. It automatically puts a name to the colors it found. The name will be the closest webcolor name, measuring the color distance between them. But the user still can rename the colors and it will keep the storyboards updated.
+
+**Currently, the tool only supports the sRGB color space, so remember to select it in the storyboard when selecting a color and also in the Assets catalog or it may not work properly.**
 
 The rules for naming the colors dinamically:
 - The closest web color name (https://en.wikipedia.org/wiki/Web_colors) is considered to name the color
@@ -25,7 +39,7 @@ That's the result of the code generation:
 ### The generated Swift file
 ![Swift file](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Swift0.3.0.png)
 
-You can also create your own extensions in a separated file to give a more semantic name to the colors:
+You can create your own extensions in a separated file to give a more semantic name to the colors:
 
 ```swift
 extension UIColor {
@@ -34,6 +48,8 @@ extension UIColor {
     }
 }
 ```
+
+But you can also, simply rename the asset to the name you want, and the tool will keep the references updated.
 
 # Using the CLI
 First, call the **build.sh** script (it will produce the **swiftcg** binary in the same folder):
