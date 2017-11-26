@@ -38,13 +38,16 @@ func main() {
     let oldColors = assets
                       .filter { $0.type == .original }
                       .map { $0.color ?? ColorData() }
-    
     let newColors = getNewColors(args: args)
     let allColors = newColors.union(oldColors)
     if !allColors.isEmpty {
         writeAllColors(allColors, args: args)
     }
-    
+    let customAssets = assets.filter { $0.type != .original }
+    // Wirte the generated UIColor extension to file
+    OutputFileManager.writeOutputfile(path: args.outputFile,
+                                      colors: allColors,
+                                      assets: customAssets)
 }
 
 func getNewColors(args: (baseFolder: String, assetsFolder: String, outputFile: String)) -> Set<ColorData> {
@@ -76,8 +79,6 @@ func writeAllColors(_ allColors: Set<ColorData>,
     }
     // Write the colors to the .xcassets folder
     AssetManager.writeColorAssets(path: args.assetsFolder, colors: allColors)
-    // Wirte the generated UIColor extension to file
-    OutputFileManager.writeOutputfile(path: args.outputFile, colors: allColors)
 }
 
 func cleanColors(args: (baseFolder: String, assetsFolder: String, outputFile: String), assets: [Asset]) {
