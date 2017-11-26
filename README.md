@@ -15,7 +15,7 @@ Since Xcode 9, we are able to define a color asset in the Assets catalog, allowi
 
 # The solution
 
-**SwiftColorGen** reads all storyboard files to find common **sRGB colors**, it creates them in a **.xcassets** folder and refer them in the storyboard. Then, it creates an **UIColor extension** allowing to access the same colors programatically. It automatically puts a name to the colors it found. The name will be the closest webcolor name, measuring the color distance between them. But, the user still can rename the colors and it will keep the storyboards updated.
+**SwiftColorGen** reads all storyboard files to find common **sRGB colors**, it creates them in a **.xcassets** folder and refer them in the storyboard. Then, it creates an **UIColor extension** allowing to access the same colors programatically. It automatically puts a name to the colors found. The name will be the closest webcolor name, measuring the color distance between them. But, the user still can rename the colors and it will keep the storyboards updated.
 
 **Currently, the tool only supports the sRGB color space, so remember to select it in the storyboard, when selecting a color and also in the Assets catalog or it may not work properly.**
 
@@ -27,7 +27,7 @@ The rules for naming the colors dinamically:
 
 SwiftColorGen is written in Swift and requires Swift to run. The project uses [AEXML](https://github.com/tadija/AEXML) as a dependency to read and write XML and [CommandLine](https://github.com/jatoben/CommandLine) to provide the CLI interface.
 
-# Screenshots
+# Demo
 That's the result of the code generation:
 
 ### The generated named colors in the Storyboard
@@ -49,7 +49,9 @@ extension UIColor {
 }
 ```
 
-But you can also, simply rename the asset to the name you want, and the tool will keep the references updated.
+But you can also, simply rename the asset to the name you want, and the tool will keep the references updated. Here a video with the tool in action:
+
+[![Demo](https://raw.githubusercontent.com/fernandodelrio/SwiftColorGen/master/Resources/Video-thumbnail0.4.0.png)](https://vimeo.com/244528270)
 
 # Using the CLI
 First, call the **build.sh** script (it will produce the **swiftcg** binary in the same folder):
