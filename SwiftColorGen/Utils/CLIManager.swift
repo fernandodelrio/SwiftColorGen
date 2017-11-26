@@ -12,6 +12,7 @@ struct CLIManager {
     static func getArgs() -> (baseFolder: String, assetsFolder: String, outputFile: String) {
         let cli = CommandLine()
         
+        // Defining the CLI options
         let assetsFolderPath = StringOption(shortFlag: "a",
                                             longFlag: "assetsFolder",
                                             required: false,
@@ -48,11 +49,13 @@ struct CLIManager {
             exit(1)
         }
         
+        // Print the help, if that's the option selected
         if help.value {
             print(help.helpMessage)
             exit(0)
         }
         
+        // Prevent invalid arguments
         if cli.unparsedArguments.count > 0 {
             print(help.helpMessage)
             exit(1)
@@ -62,11 +65,13 @@ struct CLIManager {
         var baseFolder = baseFolderPath.value
         var outputFile = outputFilePath.value
         
+        // Avoid running outside of the base folder
         if assetsFolder == "/" || baseFolder == "/" {
             print("Potentially dangerous. Don't run the tool on the root folder")
             exit(1)
         }
         
+        // Avoiding the need of calculate the final path in this situation
         if (assetsFolder ?? "").hasPrefix("..") ||
            (baseFolder ?? "").hasPrefix("..") ||
            (outputFile ?? "").hasPrefix("..") {
@@ -74,6 +79,7 @@ struct CLIManager {
             exit(1)
         }
         
+        // Obtaining the absolute path
         if let folder = assetsFolder, folder.hasPrefix(".") {
             assetsFolder = PathManager.replaceCurrentPath(folder)
         }
@@ -84,6 +90,7 @@ struct CLIManager {
             outputFile = PathManager.replaceCurrentPath(file)
         }
         
+        // Error if no assets folder is found, when searching
         if assetsFolder == nil {
             assetsFolder = PathManager.getAssetsFolder()
             if assetsFolder == nil {
@@ -92,15 +99,18 @@ struct CLIManager {
             }
         }
         
+        // Error when the user informs an invalid assets folder
         if let assetsFolder = assetsFolder, !PathManager.isValidAssetsFolder(path: assetsFolder) {
             print("Invalid Assets folder. Please specify the path for the .xcassets folder")
             exit(1)
         }
         
+        // Adding default case for the base folder
         if baseFolder == nil {
             baseFolder = FileManager.default.currentDirectoryPath
         }
         
+        // Removing the last slash, if it exists
         if let folder = assetsFolder, folder.hasSuffix("/") {
             assetsFolder = String(folder.prefix(folder.count-1))
         }
