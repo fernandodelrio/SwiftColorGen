@@ -69,28 +69,49 @@ class AssetManager {
         return assetColors
     }
     
-    private static func getAssetColor(colorsetFolder: String) -> ColorData {
+    private static func getColorDataFromAssets(components: [String: String]) -> ColorData {
         let colorData = ColorData()
+        guard let red = components["red"],
+              let green = components["green"],
+              let blue = components["blue"],
+              let alpha = components["alpha"] else {
+                return colorData
+        }
+        if red.contains(".") { // 0.0 to 1.0
+            colorData.red = Double(red) ?? 0.0
+            colorData.green = Double(green) ?? 0.0
+            colorData.blue = Double(blue) ?? 0.0
+        } else if red.contains("x") { // 0x00 to 0xFF
+            colorData.red = Double(Int(red, radix: 16) ?? 0)/255
+            colorData.green = Double(Int(green, radix: 16) ?? 0)/255
+            colorData.blue = Double(Int(blue, radix: 16) ?? 0)/255
+        } else { // 0 to 255
+            colorData.red = (Double(red) ?? 0.0)/255
+            colorData.green = (Double(green) ?? 0.0)/255
+            colorData.blue = (Double(blue) ?? 0.0)/255
+        }
+        colorData.alpha = Double(alpha) ?? 0.0
+        return colorData
+    }
+    
+    private static func getAssetColor(colorsetFolder: String) -> ColorData {
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: "\(colorsetFolder)/Contents.json")) else {
-            return colorData
+            return ColorData()
         }
         let jsonObject = try? JSONSerialization.jsonObject(with: data, options: [])
         guard let json = jsonObject as? [String: Any] else {
-            return colorData
+            return ColorData()
         }
         guard let colors = (json["colors"] as? [[String: Any]])?.first else {
-            return colorData
+            return ColorData()
         }
         guard let color = colors["color"] as? [String: Any] else {
-            return colorData
+            return ColorData()
         }
         guard let components = color["components"] as? [String: String] else {
-            return colorData
+            return ColorData()
         }
-        colorData.red = Double(components["red"] ?? "") ?? 0.0
-        colorData.green = Double(components["green"] ?? "") ?? 0.0
-        colorData.blue = Double(components["blue"] ?? "") ?? 0.0
-        colorData.alpha = Double(components["alpha"] ?? "") ?? 0.0
+        let colorData = getColorDataFromAssets(components: components)
         return colorData
     }
     
