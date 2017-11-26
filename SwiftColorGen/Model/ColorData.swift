@@ -18,10 +18,10 @@ class ColorData: Hashable {
     var alpha: Double
     
     var name: String {
-        let redValue = Int(255*Double(red))
-        let greenValue = Int(255*Double(green))
-        let blueValue = Int(255*Double(blue))
-        let alphaValue = Int(255*Double(alpha))
+        let redValue = Int(round(255*red))
+        let greenValue = Int(round(255*green))
+        let blueValue = Int(round(255*blue))
+        let alphaValue = Int(round(255*alpha))
         let hexRed = String(format: "%2X", redValue)
             .replacingOccurrences(of: " ", with: "0")
         let hexGreen = String(format: "%2X", greenValue)
