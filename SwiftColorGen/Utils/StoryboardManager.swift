@@ -20,6 +20,7 @@ struct StoryboardManager {
         return storyboards
     }
     
+    // Reads the storyboard and returns a XML document
     static func readStoryboard(path: String) -> AEXMLDocument {
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
             return AEXMLDocument()
@@ -78,6 +79,7 @@ struct StoryboardManager {
         }
     }
     
+    // Remove the "resources" storyboard key, preparing for a new code generation
     static func removeOriginalResources(xml: AEXMLDocument, assets: [Asset]) {
         guard let resources = xml.root.getChild(name: "resources") else {
             return
@@ -93,6 +95,7 @@ struct StoryboardManager {
         resources.children = valid
     }
     
+    // Updating the resources, for custom colors
     static func updateCustomResources(xml: AEXMLDocument, assets: [Asset]) {
         guard let resources = xml.root.getChild(name: "resources") else {
             return
@@ -105,10 +108,12 @@ struct StoryboardManager {
             }
             let name = child.attributes["name"] ?? ""
             var customAsset: Asset?
+            // Renamed custom color, search for the original name
             if let renamedAsset = (renamed.filter { $0.originalName == name }).first {
                 child.attributes["name"] = renamedAsset.currentName
                 customAsset = renamedAsset
             }
+            // Added custom color, search for the current name
             if let addedAsset = (added.filter { $0.currentName == name }).first {
                 customAsset = addedAsset
             }
@@ -129,6 +134,8 @@ struct StoryboardManager {
         }
     }
     
+    // Remove the named colors from storyboard, placing the colors there
+    //   again, preparing for a new code generation
     static func resetColors(xml: AEXMLDocument, assets: [Asset]) {
         ColorManager.resetColors(xml: xml.root, assets: assets)
     }

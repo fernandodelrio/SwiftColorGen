@@ -33,6 +33,8 @@ struct PathManager {
         return true
     }
     
+    // Filter storyboard files, avoid messing with code
+    //   inside Cocoa Pods, Carthage and Swift PM
     static func isValidAssetsFolder(path: String) -> Bool {
         guard path.hasSuffix(".xcassets") || path.hasSuffix(".xcassets/")  else {
             return false
@@ -52,6 +54,7 @@ struct PathManager {
         return true
     }
     
+    // Searches for the assets folder
     static func getAssetsFolder() -> String? {
         let cwd = FileManager.default.currentDirectoryPath
         let enumerator = FileManager.default.enumerator(atPath: cwd)
@@ -77,7 +80,7 @@ struct PathManager {
                                         with: FileManager.default.currentDirectoryPath)
     }
     
-    static func isAbsolute(path: String) -> Bool {
+    private static func isAbsolute(path: String) -> Bool {
         return path.hasPrefix("/") || path.hasPrefix(".")
     }
 }
