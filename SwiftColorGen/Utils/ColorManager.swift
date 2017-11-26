@@ -130,8 +130,8 @@ struct ColorManager {
                     .name
         let assetName = name.prefix(1).uppercased() + name.dropFirst()
         if colorData.alpha < 1.0 {
-            return (assetName: assetName + " (alpha \(Int(255*Double(colorData.alpha))))",
-                    outputName: name + "Alpha\(Int(255*Double(colorData.alpha)))")
+            return (assetName: assetName + " (alpha \(Int(round(255*colorData.alpha))))",
+                    outputName: name + "Alpha\(Int(round(255*colorData.alpha)))")
         } else {
             return (assetName: assetName, outputName: name)
         }
