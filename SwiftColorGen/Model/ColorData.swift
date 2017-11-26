@@ -57,7 +57,10 @@ class ColorData: Hashable {
     }
     
     static func ==(lhs: ColorData, rhs: ColorData) -> Bool {
-        return lhs.name == rhs.name
+        return fabs(lhs.red-rhs.red) < 1e-15 &&
+               fabs(lhs.green-rhs.green) < 1e-15 &&
+               fabs(lhs.blue-rhs.blue) < 1e-15 &&
+               fabs(lhs.alpha-rhs.alpha) < 1e-15
     }
     
     var hashValue: Int {

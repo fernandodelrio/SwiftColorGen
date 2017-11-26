@@ -82,9 +82,9 @@ class AssetManager {
             colorData.green = Double(green) ?? 0.0
             colorData.blue = Double(blue) ?? 0.0
         } else if red.contains("x") { // 0x00 to 0xFF
-            colorData.red = Double(Int(red, radix: 16) ?? 0)/255
-            colorData.green = Double(Int(green, radix: 16) ?? 0)/255
-            colorData.blue = Double(Int(blue, radix: 16) ?? 0)/255
+            colorData.red = Double(Int(red.suffix(2), radix: 16) ?? 0)/255
+            colorData.green = Double(Int(green.suffix(2), radix: 16) ?? 0)/255
+            colorData.blue = Double(Int(blue.suffix(2), radix: 16) ?? 0)/255
         } else { // 0 to 255
             colorData.red = (Double(red) ?? 0.0)/255
             colorData.green = (Double(green) ?? 0.0)/255
