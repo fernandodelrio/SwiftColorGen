@@ -64,6 +64,6 @@ class ColorData: Hashable {
     }
     
     var hashValue: Int {
-        return name.hashValue
+        return (red+blue+green+alpha).hashValue
     }
 }
