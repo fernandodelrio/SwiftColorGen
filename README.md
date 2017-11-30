@@ -38,14 +38,17 @@ SwiftColorGen is written in Swift and requires Swift to run. The project uses [A
 # <a id="demo"></a> Demo
 That's the result of the code generation:
 
-### The generated named colors in the Storyboard
-![Storyboard](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Storyboard0.3.0.png)
+### Collecting the colors on Storyboard and generating the Assets
+![Collecting Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Collecting-Colors0.4.0.gif)
 
-### The generated colors in the Assets catalog
-![Assets Catalog](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Assets0.3.0.png)
+### Generating the Swift file
+![Swift File](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Swift0.4.0.gif)
 
-### The generated Swift file
-![Swift file](https://github.com/fernandodelrio/SwiftColorGen/raw/master/Resources/Swift0.3.0.png)
+### Automatic renaming
+![Automatic Renaming](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Renaming0.4.0.gif)
+
+### Custom colors + multiple replace
+![Custom Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Custom-Color0.4.0.gif)
 
 You can create your own extensions in a separated file to give a more semantic name to the colors:
 
@@ -57,7 +60,7 @@ extension UIColor {
 }
 ```
 
-But you can also, simply rename the asset to the name you want, and the tool will keep the references updated. Here a video with the tool in action:
+But you can also, simply rename the asset to the name you want, and the tool will keep the references updated. Here a complete video with the tool in action:
 
 [![Demo](https://raw.githubusercontent.com/fernandodelrio/SwiftColorGen/master/Resources/Video-thumbnail0.4.0.png)](https://vimeo.com/244528270)
 
