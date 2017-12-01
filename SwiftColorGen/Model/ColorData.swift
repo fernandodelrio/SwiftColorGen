@@ -32,7 +32,7 @@ class ColorData: Hashable {
     }
     
     var assetName: String {
-        let alphaValue = Int(255*Double(alpha))
+        let alphaValue = Int(round(255*alpha))
         if alpha == 1.0 {
             return name.replacingOccurrences(of: " (\(alphaValue) )", with: "")
         } else {
@@ -41,7 +41,7 @@ class ColorData: Hashable {
     }
     
     var outputName: String {
-        let alphaValue = Int(255*Double(alpha))
+        let alphaValue = Int(round(255*alpha))
         if alpha == 1.0 {
             return name.replacingOccurrences(of: " (alpha \(alphaValue))", with: "")
         } else {
