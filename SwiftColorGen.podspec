@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name         = "SwiftColorGen"
-  s.version      = "0.4.1"
+  s.version      = "0.5.0"
   s.summary      = "A tool that generate code for Swift projects, designed to improve the maintainability of UIColors"
   s.description  = <<-DESC
                 A tool that generate code for Swift projects, designed to improve the maintainability of UIColors.
-                SwiftColorGen reads all storyboard files to find common sRGB colors.
+                SwiftColorGen reads all storyboard files to find common colors.
                 Then it creates those colors in a .xcassets folder and refer them in the storyboard.
                 Finally it creates a UIColor extension allowing to access the same colors programatically.
                    DESC
