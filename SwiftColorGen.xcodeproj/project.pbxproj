@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8138F601FD2DDB10088EB2A /* ColorSpaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8138F5F1FD2DDB10088EB2A /* ColorSpaceManager.swift */; };
 		D83734001FC8A44800B59423 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83733FF1FC8A44800B59423 /* AssetManager.swift */; };
 		D83734021FC8A56500B59423 /* OutputFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83734011FC8A56500B59423 /* OutputFileManager.swift */; };
 		D83734041FC8B5B800B59423 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83734031FC8B5B800B59423 /* Asset.swift */; };
@@ -41,12 +42,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D8138F5F1FD2DDB10088EB2A /* ColorSpaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpaceManager.swift; sourceTree = "<group>"; };
 		D83733FF1FC8A44800B59423 /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 		D83734011FC8A56500B59423 /* OutputFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputFileManager.swift; sourceTree = "<group>"; };
 		D83734031FC8B5B800B59423 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		D879B3D81FC76C7A0095C592 /* CommandLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLine.swift; sourceTree = "<group>"; };
 		D879B3D91FC76C7A0095C592 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		D879B3DA1FC76C7A0095C592 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		D88AAD501FD2F77F006F31F0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D89E2EE21FC1B10800CDC51C /* SwiftColorGen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftColorGen; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89E2EE51FC1B10800CDC51C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D89E2EEC1FC1B26200CDC51C /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
@@ -89,12 +92,21 @@
 			path = CommandLineKit;
 			sourceTree = "<group>";
 		};
+		D88AAD4F1FD2F77E006F31F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D88AAD501FD2F77F006F31F0 /* AppKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D89E2ED91FC1B10800CDC51C = {
 			isa = PBXGroup;
 			children = (
 				D89E2F221FC1D3B300CDC51C /* Example */,
 				D89E2EE41FC1B10800CDC51C /* SwiftColorGen */,
 				D89E2EE31FC1B10800CDC51C /* Products */,
+				D88AAD4F1FD2F77E006F31F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +160,7 @@
 				D89E2F1F1FC1C2AB00CDC51C /* CLIManager.swift */,
 				D83733FF1FC8A44800B59423 /* AssetManager.swift */,
 				D83734011FC8A56500B59423 /* OutputFileManager.swift */,
+				D8138F5F1FD2DDB10088EB2A /* ColorSpaceManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -244,6 +257,7 @@
 				D89E2F1E1FC1B90900CDC51C /* PathManager.swift in Sources */,
 				D89E2EE61FC1B10800CDC51C /* main.swift in Sources */,
 				D89E2EED1FC1B26200CDC51C /* ColorData.swift in Sources */,
+				D8138F601FD2DDB10088EB2A /* ColorSpaceManager.swift in Sources */,
 				D83734021FC8A56500B59423 /* OutputFileManager.swift in Sources */,
 				D89E2F0E1FC1B34F00CDC51C /* Element.swift in Sources */,
 				D83734001FC8A44800B59423 /* AssetManager.swift in Sources */,
