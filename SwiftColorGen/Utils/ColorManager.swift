@@ -12,19 +12,21 @@ struct ColorManager {
     static func getColors(xml: AEXMLElement) -> Set<ColorData> {
         var colors: Set<ColorData> = Set<ColorData>()
         func read(xml: AEXMLElement) {
-            if xml.name == "color",
-               let colorSpace = xml.attributes["customColorSpace"],
-               colorSpace == "sRGB",
-               let red = xml.attributes["red"],
-               let green = xml.attributes["green"],
-               let blue = xml.attributes["blue"],
-               let alpha = xml.attributes["alpha"] {
-                let color = ColorData()
-                color.red = Double(red) ?? 0.0
-                color.green = Double(green) ?? 0.0
-                color.blue = Double(blue) ?? 0.0
-                color.alpha = Double(alpha) ?? 0.0
-                colors.insert(color)
+            if xml.name == "color" {
+                ColorSpaceManager.convertToSRGB(xml: xml)
+                if let colorSpace = xml.attributes["customColorSpace"],
+                   colorSpace == "sRGB",
+                   let red = xml.attributes["red"],
+                   let green = xml.attributes["green"],
+                   let blue = xml.attributes["blue"],
+                   let alpha = xml.attributes["alpha"] {
+                    let color = ColorData()
+                    color.red = Double(red) ?? 0.0
+                    color.green = Double(green) ?? 0.0
+                    color.blue = Double(blue) ?? 0.0
+                    color.alpha = Double(alpha) ?? 0.0
+                    colors.insert(color)
+                }
             }
             if xml.name != "namedColor" {
                 for child in xml.children {
@@ -71,20 +73,22 @@ struct ColorManager {
     static func updateColors(xml: AEXMLElement, colors: Set<ColorData>) {
         let generatorData = getColorsForGenerator(colors: colors)
         func read(xml: AEXMLElement) {
-            if xml.name == "color",
-                let colorSpace = xml.attributes["customColorSpace"],
-                colorSpace == "sRGB",
-                let red = xml.attributes["red"],
-                let green = xml.attributes["green"],
-                let blue = xml.attributes["blue"],
-                let alpha = xml.attributes["alpha"] {
-                let color = ColorData()
-                color.red = Double(red) ?? 0.0
-                color.green = Double(green) ?? 0.0
-                color.blue = Double(blue) ?? 0.0
-                color.alpha = Double(alpha) ?? 0.0
-                if let data = (generatorData.filter { $0.color == color }.first) {
-                    setColor(xml: xml, name: data.assetName)
+            if xml.name == "color" {
+                ColorSpaceManager.convertToSRGB(xml: xml)
+                if let colorSpace = xml.attributes["customColorSpace"],
+                   colorSpace == "sRGB",
+                   let red = xml.attributes["red"],
+                   let green = xml.attributes["green"],
+                   let blue = xml.attributes["blue"],
+                   let alpha = xml.attributes["alpha"] {
+                    let color = ColorData()
+                    color.red = Double(red) ?? 0.0
+                    color.green = Double(green) ?? 0.0
+                    color.blue = Double(blue) ?? 0.0
+                    color.alpha = Double(alpha) ?? 0.0
+                    if let data = (generatorData.filter { $0.color == color }.first) {
+                        setColor(xml: xml, name: data.assetName)
+                    }
                 }
             }
             for child in xml.children {
