@@ -18,4 +18,5 @@ SwiftColorGen/Utils/ColorManager.swift \
 SwiftColorGen/Utils/PathManager.swift \
 SwiftColorGen/Utils/OutputFileManager.swift \
 SwiftColorGen/Utils/AssetManager.swift \
+SwiftColorGen/Utils/ColorSpaceManager.swift \
 SwiftColorGen/Utils/StoryboardManager.swift -o swiftcg
