@@ -1,4 +1,8 @@
 # SwiftColorGen
+![Swift 4.0](https://img.shields.io/badge/Swift-4.0-green.svg)
+[![CocoaPods compatible](https://img.shields.io/cocoapods/v/SwiftColorGen.svg)](#cocoapods)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+
 A tool that generate code for Swift projects, designed to improve the maintainability of UIColors. 
 
 Please notice, this tool still under development. It's on a validation phase, where I'll test it integrated with existing iOS projects to see how useful it is. Feedbacks are appreciated.
