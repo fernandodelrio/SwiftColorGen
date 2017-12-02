@@ -37,16 +37,16 @@ SwiftColorGen is written in Swift and requires Swift to run. The project uses [A
 That's the result of the code generation:
 
 ### Collecting the colors on Storyboard and generating the Assets
-![Collecting Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Collecting-Colors0.4.0.gif)
+![Collecting Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Collecting-Colors0.5.0.gif)
 
 ### Generating the Swift file
-![Swift File](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Swift0.4.0.gif)
+![Swift File](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Swift0.5.0.gif)
 
 ### Automatic renaming
-![Automatic Renaming](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Renaming0.4.0.gif)
+![Automatic Renaming](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Renaming0.5.0.gif)
 
 ### Custom colors + multiple replace
-![Custom Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Custom-Color0.4.0.gif)
+![Custom Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Custom-Color0.5.0.gif)
 
 Here a complete video with the tool in action:
 
