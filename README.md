@@ -23,9 +23,7 @@ Since Xcode 9, we are able to define a color asset in the Assets catalog, allowi
 3. In an existing project with no color assets defined, we need to group all the colors in the storyboards, manually create the asset colors and replace them everywhere.
 # <a id="solution"></a> The solution
 
-**SwiftColorGen** reads all storyboard files to find common **sRGB colors**, it creates them in a **.xcassets** folder and refer them in the storyboard. Then, it creates an **UIColor extension** allowing to access the same colors programmatically. It automatically puts a name to the colors found. The name will be the closest webcolor name, measuring the color distance between them. But, the user still can rename the colors and it will keep the storyboards updated.
-
-**Currently, the tool only supports the sRGB color space, so remember to select it in the storyboard, when selecting a color and also in the Assets catalog or it may not work properly.**
+**SwiftColorGen** reads all storyboard files to find common colors, it creates them in a **.xcassets** folder (without any duplications) and refer them back in the storyboard. Then, it creates an **UIColor extension** allowing to access the same colors programmatically. It automatically puts a name to the colors found. The name will be the closest webcolor name, measuring the color distance between them. But, the user still can rename the colors and it will keep the storyboards updated.
 
 The rules for naming the colors dinamically:
 - The closest web color name (https://en.wikipedia.org/wiki/Web_colors) is considered to name the color
@@ -39,28 +37,18 @@ SwiftColorGen is written in Swift and requires Swift to run. The project uses [A
 That's the result of the code generation:
 
 ### Collecting the colors on Storyboard and generating the Assets
-![Collecting Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Collecting-Colors0.4.0.gif)
+![Collecting Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Collecting-Colors0.5.0.gif)
 
 ### Generating the Swift file
-![Swift File](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Swift0.4.0.gif)
+![Swift File](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Swift0.5.0.gif)
 
 ### Automatic renaming
-![Automatic Renaming](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Renaming0.4.0.gif)
+![Automatic Renaming](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Renaming0.5.0.gif)
 
 ### Custom colors + multiple replace
-![Custom Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Custom-Color0.4.0.gif)
+![Custom Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Custom-Color0.5.0.gif)
 
-You can create your own extensions in a separated file to give a more semantic name to the colors:
-
-```swift
-extension UIColor {
-    class func defaultTextColor() -> UIColor {
-        return .deepPinkColor()
-    }
-}
-```
-
-But you can also, simply rename the asset to the name you want, and the tool will keep the references updated. Here a complete video with the tool in action:
+Here a complete video with the tool in action:
 
 [![Demo](https://raw.githubusercontent.com/fernandodelrio/SwiftColorGen/master/Resources/Video-thumbnail0.4.0.png)](https://vimeo.com/244528270)
 
@@ -87,6 +75,8 @@ Example:
 ```shell
 $ ./swiftcg -o Example/Generated.swift
 ```
+
+**Notice that OS X 10.12 is required to run, because of a dependency from a NSColor method (used to convert between different color spaces)**
 
 To test with the Example provided, call the **test.sh** script (it will update the files inside the Example folder):
 ```shell
@@ -116,10 +106,9 @@ $ pod install
 4. Build your project and it's done. Remember to add the generated Swift file to Xcode, if it's not already there.
 
 # TODO
-1. Add support to other color spaces than the sRGB
-2. Reduce the number of changes in the storyboards
-3. Test on a larger project to see what will happen
-4. Add tests
+1. Reduce the number of changes in the storyboards
+2. Test on a larger project to see what will happen
+3. Add tests
 
 # <a id="contributing"></a> Contributing
 This project still on a initial stage of development. Feel free to contribute by testing it and reporting bugs. If you want to help developing it, checkout the TODO list. If you made some enhancement, open a pull request.

@@ -22,7 +22,7 @@ class OutputFileManager {
             } else {
                 output += "\tclass func \(data.outputName)Color() -> UIColor {\n"
             }
-            output += "\t\treturn UIColor(named: \"\(data.assetName)\") ?? UIColor.white\n"
+            output += "\t\treturn UIColor(named: \"\(data.assetName)\") ?? .clear\n"
             output += "\t}\n\n"
         }
         // Write the custom colors
@@ -30,7 +30,7 @@ class OutputFileManager {
             let name = getCustomColorOutputname(name: asset.currentName ?? "")
             output += "\t/// Color #\(asset.color?.name ?? "")\n"
             output += "\tclass func \(name)() -> UIColor {\n"
-            output += "\t\treturn UIColor(named: \"\(asset.currentName ?? "")\") ?? UIColor.white\n"
+            output += "\t\treturn UIColor(named: \"\(asset.currentName ?? "")\") ?? .clear\n"
             output += "\t}\n\n"
         }
         output = String(output.prefix(output.count-1))
