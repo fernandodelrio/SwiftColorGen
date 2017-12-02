@@ -126,16 +126,18 @@ class ColorSpaceManager {
         let green = CGFloat(Double(xml.attributes["green"] ?? "") ?? 0.0)
         let blue = CGFloat(Double(xml.attributes["blue"] ?? "") ?? 0.0)
         let alpha = CGFloat(Double(xml.attributes["alpha"] ?? "") ?? 0.0)
-        guard let color = NSColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
-                            .usingColorSpace(.sRGB) else {
-            return
+        if #available(OSX 10.12, *) {
+            guard let color = NSColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
+                                .usingColorSpace(.sRGB) else {
+                return
+            }
+            xml.attributes["customColorSpace"] = "sRGB"
+            xml.attributes["colorSpace"] = "custom"
+            xml.attributes["red"] = "\(color.redComponent)"
+            xml.attributes["green"] = "\(color.greenComponent)"
+            xml.attributes["blue"] = "\(color.blueComponent)"
+            xml.attributes["alpha"] = "\(color.alphaComponent)"
         }
-        xml.attributes["customColorSpace"] = "sRGB"
-        xml.attributes["colorSpace"] = "custom"
-        xml.attributes["red"] = "\(color.redComponent)"
-        xml.attributes["green"] = "\(color.greenComponent)"
-        xml.attributes["blue"] = "\(color.blueComponent)"
-        xml.attributes["alpha"] = "\(color.alphaComponent)"
     }
     
     private static func convertAdobeRGB1998(xml: AEXMLElement) {
