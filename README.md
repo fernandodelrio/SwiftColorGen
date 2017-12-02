@@ -76,6 +76,8 @@ Example:
 $ ./swiftcg -o Example/Generated.swift
 ```
 
+**Notice that OS X 10.12 is required to run, because of a dependency from a NSColor method (used to convert between different color spaces)**
+
 To test with the Example provided, call the **test.sh** script (it will update the files inside the Example folder):
 ```shell
 $ chmod +x test.sh
