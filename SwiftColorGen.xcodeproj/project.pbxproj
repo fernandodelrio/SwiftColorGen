@@ -41,6 +41,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D8138F5E1FD2DB600088EB2A /* Test.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
 		D83733FF1FC8A44800B59423 /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 		D83734011FC8A56500B59423 /* OutputFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputFileManager.swift; sourceTree = "<group>"; };
 		D83734031FC8B5B800B59423 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
@@ -178,6 +179,7 @@
 				D89E2F251FC1D43700CDC51C /* Second.storyboard */,
 				D89E2F271FC1D82F00CDC51C /* Assets.xcassets */,
 				D89E2F281FC1D85900CDC51C /* Generated.swift */,
+				D8138F5E1FD2DB600088EB2A /* Test.storyboard */,
 			);
 			path = Example;
 			sourceTree = "<group>";
