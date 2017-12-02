@@ -123,6 +123,7 @@ struct StoryboardManager {
             guard let color = child.children.first, color.name == "color" else {
                 return
             }
+            ColorSpaceManager.convertToSRGB(xml: color)
             guard color.attributes["colorSpace"] == "custom",
                 color.attributes["customColorSpace"] == "sRGB" else {
                     return
