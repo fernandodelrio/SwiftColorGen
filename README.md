@@ -52,6 +52,43 @@ That's the result of the code generation:
 ### Custom colors + multiple replace
 ![Custom Colors](https://github.com/fernandodelrio/SwiftColorGen/blob/master/Resources/Gif-Custom-Color0.5.0.gif)
 
+### Code generated
+The tool should generate something like:
+
+```swift
+// Don't change. Auto generated file. SwiftColorGen
+import UIKit
+
+extension UIColor {
+    /// Color #FFC034 (alpha 255)
+    class func goldColor() -> UIColor {
+        return UIColor(named: "Gold") ?? .clear
+    }
+  
+    /// Color #8D00FF (alpha 255)
+    class func darkVioletColor() -> UIColor {
+        return UIColor(named: "DarkViolet") ?? .clear
+    }
+    
+    /// Color #00FF00 (alpha 255)
+    class func myCoolGreen() -> UIColor {
+        return UIColor(named: "MyCoolGreen") ?? .clear
+    }
+}
+
+```
+
+You will probably want to rename the color and run the tool again, but you can just create another extension on another file referring the generated code:
+
+```swift
+extension UIColor {
+    /// Color #FFC034 (alpha 255)
+    class func myTextColor() -> UIColor {
+        return .darkVioletColor()
+    }
+}
+```
+
 Here a complete video with the tool in action:
 
 [![Demo](https://raw.githubusercontent.com/fernandodelrio/SwiftColorGen/master/Resources/Video-thumbnail0.4.0.png)](https://vimeo.com/244528270)
@@ -109,13 +146,8 @@ $ pod install
 ```
 4. Build your project and it's done. Remember to add the generated Swift file to Xcode, if it's not already there.
 
-# TODO
-1. Reduce the number of changes in the storyboards
-2. Test on a larger project to see what will happen
-3. Add tests
-
 # <a id="contributing"></a> Contributing
-This project still on a initial stage of development. Feel free to contribute by testing it and reporting bugs. If you want to help developing it, checkout the TODO list. If you made some enhancement, open a pull request.
+This project still on a initial stage of development. Feel free to contribute by testing it and reporting bugs. If you want to help developing it, checkout the issues section. If you fixed some issue or made some enhancement, open a pull request.
 
 # <a id="license"></a> License
 SwiftColorGen is available under the MIT license. See the LICENSE file for more info.
