@@ -18,9 +18,9 @@ class OutputFileManager {
         generatorData.forEach { data in
             output += "\t/// Color #\(data.color.name)\n"
             if data.outputNeedsPrefix {
-                output += "\tclass func gen\(data.outputName)() -> UIColor {\n"
+                output += "\tstatic var gen\(data.outputName): UIColor {\n"
             } else {
-                output += "\tclass func \(data.outputName)Color() -> UIColor {\n"
+                output += "\tstatic var \(data.outputName)Color: UIColor {\n"
             }
             output += "\t\treturn UIColor(named: \"\(data.assetName)\") ?? .clear\n"
             output += "\t}\n\n"
@@ -29,7 +29,7 @@ class OutputFileManager {
         assets.forEach { asset in
             let name = getCustomColorOutputname(name: asset.currentName ?? "")
             output += "\t/// Color #\(asset.color?.name ?? "")\n"
-            output += "\tclass func \(name)() -> UIColor {\n"
+            output += "\tstatic var \(name): UIColor {\n"
             output += "\t\treturn UIColor(named: \"\(asset.currentName ?? "")\") ?? .clear\n"
             output += "\t}\n\n"
         }
