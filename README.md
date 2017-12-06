@@ -61,17 +61,17 @@ import UIKit
 
 extension UIColor {
     /// Color #FFC034 (alpha 255)
-    class func goldColor() -> UIColor {
+    static var goldColor: UIColor {
         return UIColor(named: "Gold") ?? .clear
     }
   
     /// Color #8D00FF (alpha 255)
-    class func darkVioletColor() -> UIColor {
+    static var darkVioletColor: UIColor {
         return UIColor(named: "DarkViolet") ?? .clear
     }
     
     /// Color #00FF00 (alpha 255)
-    class func myCoolGreen() -> UIColor {
+    static var myCoolGreen: UIColor {
         return UIColor(named: "MyCoolGreen") ?? .clear
     }
 }
@@ -82,9 +82,8 @@ You will probably want to rename the color and run the tool again, but you can j
 
 ```swift
 extension UIColor {
-    /// Color #FFC034 (alpha 255)
-    class func myTextColor() -> UIColor {
-        return .darkVioletColor()
+    static var myTextColor: UIColor {
+        return .darkVioletColor
     }
 }
 ```
