@@ -79,6 +79,10 @@
 /* Begin PBXFileReference section */
 		"AEXML::AEXML::Product" /* AEXML.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AEXML.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"CommandLine::CommandLine::Product" /* CommandLine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommandLine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D83860CA1FDC5CF300D4E762 /* Second.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Second.storyboard; path = Example/Second.storyboard; sourceTree = "<group>"; };
+		D83860CB1FDC5CF300D4E762 /* First.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = First.storyboard; path = Example/First.storyboard; sourceTree = "<group>"; };
+		D83860CC1FDC5CF300D4E762 /* Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Generated.swift; path = Example/Generated.swift; sourceTree = "<group>"; };
+		D83860CD1FDC5CF300D4E762 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/Assets.xcassets; sourceTree = "<group>"; };
 		OBJ_14 /* AEXMLElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEXMLElement.swift; sourceTree = "<group>"; };
 		OBJ_15 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		OBJ_16 /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
@@ -144,6 +148,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D83860C91FDC5CC700D4E762 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				D83860CD1FDC5CF300D4E762 /* Assets.xcassets */,
+				D83860CB1FDC5CF300D4E762 /* First.storyboard */,
+				D83860CC1FDC5CF300D4E762 /* Generated.swift */,
+				D83860CA1FDC5CF300D4E762 /* Second.storyboard */,
+			);
+			name = Example;
+			sourceTree = "<group>";
+		};
 		OBJ_10 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,16 +249,16 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
+				D83860C91FDC5CC700D4E762 /* Example */,
 				OBJ_7 /* Sources */,
 				OBJ_10 /* Tests */,
 				OBJ_11 /* Dependencies */,
 				OBJ_39 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -406,7 +421,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_39 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
