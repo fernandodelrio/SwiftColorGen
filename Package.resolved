@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AEXML",
+        "repositoryURL": "https://github.com/tadija/AEXML.git",
+        "state": {
+          "branch": null,
+          "revision": "09f27784d9e328670ef0a181c832cce497117131",
+          "version": "4.2.2"
+        }
+      },
+      {
+        "package": "CommandLine",
+        "repositoryURL": "https://github.com/silt-lang/CommandLine",
+        "state": {
+          "branch": null,
+          "revision": "5bdfea60048a932091daa07b797938dce35e4cf0",
+          "version": "4.0.0"
+        }
+      },
+      {
+        "package": "SwiftColorGenLibrary",
+        "repositoryURL": "https://github.com/fernandodelrio/SwiftColorGenLibrary.git",
+        "state": {
+          "branch": null,
+          "revision": "7ea87295e94fe7d1ed86564fc18673b5090c2ad8",
+          "version": "0.6.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
