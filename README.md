@@ -3,7 +3,7 @@
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/SwiftColorGen.svg)](#cocoapods)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
-A tool that generate code for Swift projects, designed to improve the maintainability of UIColors. 
+A tool that generate code for Swift projects, designed to improve the maintainability of UIColors.
 
 Please notice, this tool still under development. It's on a validation phase, where I'll test it integrated with existing iOS projects to see how useful it is. Feedbacks are appreciated.
 Also notice this tool not only generates new code, but also updates existing storyboard files, so **keep your code under versioning control to avoid any data loss!**
@@ -64,12 +64,12 @@ extension UIColor {
     static var goldColor: UIColor {
         return UIColor(named: "Gold") ?? .clear
     }
-  
+
     /// Color #8D00FF (alpha 255)
     static var darkVioletColor: UIColor {
         return UIColor(named: "DarkViolet") ?? .clear
     }
-    
+
     /// Color #00FF00 (alpha 255)
     static var myCoolGreen: UIColor {
         return UIColor(named: "MyCoolGreen") ?? .clear
@@ -93,36 +93,32 @@ Here a complete video with the tool in action:
 [![Demo](https://raw.githubusercontent.com/fernandodelrio/SwiftColorGen/master/Resources/Video-thumbnail0.4.0.png)](https://vimeo.com/244528270)
 
 # <a id="cli"></a> Using the CLI
-First, call the **build.sh** script (it will produce the **swiftcg** binary in the same folder):
+First, install the dependencies:
 ```shell
-$ chmod +x build.sh
-$ ./build.sh
+$ swift package update
+```
+Build it:
+```shell
+$ swift build
 ```
 
-Then call the binary passing with the appropriate parameters:
-
+Then run passing the appropriate parameters (if you prefer, you can also use the binary generated inside the **.build** folder):
 ```shell
-Usage: ./swiftcg [options]
+Usage: swift run SwiftColorGen [options]
 -o --outputFile (required):
     Path to the output Swift file
 -b --baseFolder (optional):
     Path to the folder where the storyboards are located. Defaults to the current working directory
 -a --assetsFolder (optional):
     Path to the assets folder. Defaults to the first .xcassets found under the base folder
- ```
- 
+```
+
 Example:
 ```shell
-$ ./swiftcg -o Example/Generated.swift
+$ swift run SwiftColorGen -o Example/Generated.swift
 ```
 
 **Notice that OS X 10.12 is required to run, because of a dependency from a NSColor method (used to convert between different color spaces)**
-
-To test with the Example provided, call the **test.sh** script (it will update the files inside the Example folder):
-```shell
-$ chmod +x test.sh
-$ ./test.sh
-```
 
 # <a id="installation"></a> Installation
 You can install the tool using CocoaPods and then add a **Build Phase** step, that runs SwiftColorGen every time the project is built.
@@ -135,7 +131,6 @@ You can install the tool using CocoaPods and then add a **Build Phase** step, th
 pod 'SwiftColorGen'
 ```
 2. Install the dependencies:
-
 ```shell
 $ pod install
 ```
