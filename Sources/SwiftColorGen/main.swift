@@ -19,6 +19,14 @@
 // 3. The swift output file (where the UIColor's extension will be
 //   created)
 //
+// There's an example inside the project, so you can test the code
+//   generation.
+// You can call the CLI using the terminal, but you can also call
+//   it using Xcode. To do that, just edit the scheme and add
+//   'Arguments Passed On Launch':
+//      -b $SRCROOT/Example
+//      -a $SRCROOT/Example/Assets.xcassets
+//      -o $SRCROOT/Example/Generated.swift
 //
 
 import Foundation
