@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SwiftColorGen"
-  s.version      = "0.6.0"
+  s.version      = "0.6.1"
   s.summary      = "A tool that generate code for Swift projects, designed to improve the maintainability of UIColors"
   s.description  = <<-DESC
                 A tool that generate code for Swift projects, designed to improve the maintainability of UIColors.

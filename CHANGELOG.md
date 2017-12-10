@@ -1,11 +1,16 @@
 # Change Log
 
-## [0.6.0](https://github.com/fernandodelrio/SwiftColorGen/releases/tag/0.5.1)
+## [0.6.1](https://github.com/fernandodelrio/SwiftColorGen/releases/tag/0.6.1)
+
+### Fixed
+- Updated SwiftColorGenLibrary to 0.6.1. [#3](https://github.com/fernandodelrio/SwiftColorGenLibrary/issues/3) was fixed.
+
+## [0.6.0](https://github.com/fernandodelrio/SwiftColorGen/releases/tag/0.6.0)
 
 ### Updated
 - Updated whole project structure to use Swift Package Manager (#8)
 - Moved the [SwiftColorGen](https://github.com/fernandodelrio/SwiftColorGenLibrary) core to a separate repo
-- Now using [AEXML](https://github.com/tadija/AEXML) and [CommandLine](https://github.com/jatoben/CommandLine) as dependencies in the new repo, improving the maintainability 
+- Now using [AEXML](https://github.com/tadija/AEXML) and [CommandLine](https://github.com/jatoben/CommandLine) as dependencies in the new repo, improving the maintainability
 
 ## [0.5.1](https://github.com/fernandodelrio/SwiftColorGen/releases/tag/0.5.1)
 
